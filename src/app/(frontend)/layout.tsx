@@ -33,12 +33,21 @@ export const metadata: Metadata = {
 		url: siteUrl,
 		siteName,
 		title: 'Деталь — интернет-магазин автозапчастей',
-		description: siteDescription
+		description: siteDescription,
+		images: [
+			{
+				url: '/og.png',
+				width: 1200,
+				height: 630,
+				alt: 'Деталь — интернет-магазин автозапчастей'
+			}
+		]
 	},
 	twitter: {
 		card: 'summary_large_image',
 		title: 'Деталь — интернет-магазин автозапчастей',
-		description: siteDescription
+		description: siteDescription,
+		images: ['/og.png']
 	},
 	robots: {
 		index: true,
