@@ -1,0 +1,24 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: auto_shop
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5435:5432'
+    volumes:
+      - auto-shop-db-dev:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d auto_shop']
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks:
+      - auto-shop-dev
+
+networks:
+  auto-shop-dev:
+
+volumes:
+  auto-shop-db-dev:

@@ -1,0 +1,21 @@
+@use 'shared/styles' as *;
+
+.viewport {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: $space-24;
+	z-index: $z-modal;
+	height: 0;
+	pointer-events: none;
+}
+
+.slot {
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	transform-origin: bottom center;
+	transition:
+		transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+		opacity 0.28s ease;
+}

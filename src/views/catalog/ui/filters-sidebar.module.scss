@@ -1,0 +1,172 @@
+@use 'shared/styles' as *;
+
+.filters {
+	align-self: start;
+	border: $border-width solid $color-black;
+	border-radius: $radius-12;
+	overflow: hidden;
+}
+
+.filtersEmbedded {
+	border: none;
+	border-radius: 0;
+}
+
+.head {
+	@include flex-between;
+	padding: 16rem 20rem 17rem;
+	border-bottom: $border-width solid $color-black;
+}
+
+.title {
+	@include card-title;
+	color: $color-black;
+}
+
+.clear {
+	@include reset-button;
+	display: flex;
+	align-items: center;
+	color: $color-brown-light;
+	transition: color $transition-base;
+
+	@include hover {
+		color: $color-black;
+	}
+}
+
+.clearText {
+	@include text-body;
+
+	@include mobile {
+		@include text-medium;
+	}
+}
+
+.clearIcon {
+	@include flex-center;
+	width: 30rem;
+	height: 30rem;
+
+	@include mobile {
+		width: 32rem;
+		height: 32rem;
+	}
+}
+
+.clearIcon span,
+.clearIcon svg {
+	width: 10rem;
+	height: 10rem;
+
+	@include mobile {
+		width: 12rem;
+		height: 12rem;
+	}
+}
+
+.group {
+	display: flex;
+	flex-direction: column;
+	padding: $space-20 $space-20 $space-21;
+
+	&:not(:last-of-type) {
+		border-bottom: $border-width solid $color-border;
+	}
+}
+
+.groupHead {
+	@include reset-button;
+	@include flex-between;
+	width: 100%;
+	cursor: pointer;
+}
+
+.groupTitle {
+	@include text-semibold;
+	color: $color-black;
+}
+
+.groupIcon {
+	display: block;
+	width: 15rem;
+	height: 15rem;
+	color: $color-black;
+	transition: transform $transition-fast;
+}
+
+.groupIconOpen {
+	transform: rotate(180deg);
+}
+
+.groupBody {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: grid-template-rows $transition-base;
+}
+
+.groupBodyOpen {
+	grid-template-rows: 1fr;
+}
+
+.groupBodyInner {
+	overflow: hidden;
+	min-height: 0;
+}
+
+.groupContent {
+	display: flex;
+	flex-direction: column;
+	gap: $space-12;
+	padding-top: $space-16;
+	opacity: 0;
+	transition: opacity $transition-fast;
+
+	.groupBodyOpen & {
+		opacity: 1;
+	}
+}
+
+.priceRange {
+	display: flex;
+	align-items: center;
+	gap: $space-8;
+}
+
+.priceInput {
+	width: 104rem;
+	padding: $space-12 $space-8;
+	border: $border-width solid $color-black;
+	border-radius: $radius-8;
+	background: $color-white;
+	@include text-medium;
+	color: $color-black;
+
+	@include mobile {
+		flex: 1;
+		width: auto;
+		min-width: 0;
+	}
+
+	&::placeholder {
+		color: $color-baige;
+	}
+
+	&:focus {
+		outline: none;
+	}
+}
+
+.priceSep {
+	@include text-medium;
+	color: $color-baige;
+}
+
+.foot {
+	padding: 17rem 20rem 16rem;
+	border-top: $border-width solid $color-black;
+}
+
+.submit {
+	width: 100%;
+}

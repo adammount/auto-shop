@@ -1,0 +1,101 @@
+@use 'shared/styles' as *;
+
+.wrap {
+	display: flex;
+	flex-direction: column;
+}
+
+.tabs {
+	display: flex;
+	border-bottom: $border-width solid $color-border;
+
+	@include mobile {
+		justify-content: space-between;
+	}
+}
+
+.tab {
+	@include reset-button;
+	@include tab-text;
+	padding: 12rem 16rem;
+	color: $color-brown-light;
+	border-bottom: 2rem solid transparent;
+	transition: color $transition-fast;
+
+	@include mobile {
+		padding: 12rem $space-8 14rem;
+		font-size: 15rem;
+		white-space: nowrap;
+	}
+
+	@include hover {
+		color: $color-black;
+	}
+}
+
+.tabActive {
+	color: $color-black;
+	border-bottom-color: $color-black;
+}
+
+.panel {
+	display: flex;
+	flex-direction: column;
+	gap: $space-16;
+	padding-top: $space-24;
+	max-width: 651rem;
+}
+
+.text {
+	@include text-body;
+	line-height: 26rem;
+	color: $color-brown-light;
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	gap: $space-8;
+	padding-top: $space-8;
+}
+
+.listItem {
+	position: relative;
+	padding-left: $space-20;
+	@include text-body;
+	color: $color-brown-light;
+
+	&::before {
+		content: '';
+		position: absolute;
+		left: $space-6;
+		top: 9rem;
+		width: 5rem;
+		height: 5rem;
+		border-radius: $radius-full;
+		background: $color-brown-light;
+	}
+}
+
+.specs {
+	display: flex;
+	flex-direction: column;
+}
+
+.specRow {
+	@include flex-between;
+	padding: $space-8 0 9rem;
+	border-bottom: $border-width solid $color-border;
+}
+
+.specKey {
+	@include text-body;
+	color: $color-brown-light;
+}
+
+.specValue {
+	@include text-medium;
+	font-size: 13rem;
+	line-height: 20rem;
+	color: $color-black;
+}

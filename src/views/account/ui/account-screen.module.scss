@@ -1,0 +1,68 @@
+@use 'shared/styles' as *;
+
+.screen {
+	@include container;
+	padding-block: $space-32 $space-64;
+
+	@include mobile {
+		padding-block: $space-24 $space-32;
+	}
+}
+
+.hero {
+	display: flex;
+	flex-direction: column;
+	gap: $space-16;
+	padding-bottom: $space-24;
+}
+
+.titleRow {
+	@include flex-between;
+	align-items: center;
+
+	@include mobile {
+		align-items: flex-end;
+		gap: $space-12;
+	}
+}
+
+.title {
+	@include page-title;
+	color: $color-black;
+
+	@include mobile {
+		min-width: 0;
+	}
+}
+
+.role {
+	display: inline-flex;
+	align-items: center;
+	padding: 7rem 9rem;
+	border: $border-width solid $color-black;
+	border-radius: $radius-full;
+	@include badge-text;
+	color: $color-brown-dark;
+
+	@include mobile {
+		flex-shrink: 0;
+	}
+}
+
+.layout {
+	display: grid;
+	grid-template-columns: 260rem minmax(0, 1fr);
+	gap: 32rem;
+	align-items: start;
+
+	@include mobile {
+		grid-template-columns: 1fr;
+		gap: $space-24;
+	}
+}
+
+.stack {
+	display: flex;
+	flex-direction: column;
+	gap: $space-24;
+}

@@ -1,0 +1,54 @@
+@use 'shared/styles' as *;
+
+.head {
+	@include flex-between;
+	gap: $space-16;
+	width: 100%;
+
+	@include mobile {
+		align-items: flex-end;
+	}
+}
+
+.title {
+	@include section-head;
+	min-width: 0;
+	color: $color-black;
+
+	@include mobile {
+		line-height: 38rem;
+	}
+}
+
+.action {
+	display: flex;
+	align-items: center;
+	gap: $space-6;
+	flex-shrink: 0;
+	@include text-semibold;
+	white-space: nowrap;
+	color: $color-black;
+	transition: opacity $transition-fast;
+
+	@include hover {
+		opacity: 0.7;
+
+		svg {
+			transform: translateX(2rem);
+		}
+	}
+}
+
+.actionIcon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 16rem;
+	height: 14rem;
+
+	svg {
+		width: 9rem;
+		height: 8rem;
+		transition: transform $transition-fast;
+	}
+}

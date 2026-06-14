@@ -1,0 +1,57 @@
+@use 'shared/styles/tokens' as *;
+@use 'shared/styles/breakpoints' as *;
+
+@mixin container {
+	width: 100%;
+	max-width: $container-max;
+	margin-inline: auto;
+	padding-inline: $container-padding;
+
+	@include mobile {
+		padding-inline: $container-padding-mobile;
+	}
+}
+
+@mixin flex-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+@mixin flex-between {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+@mixin reset-button {
+	padding: 0;
+	border: none;
+	background: none;
+	color: inherit;
+	cursor: pointer;
+}
+
+@mixin line-clamp($lines) {
+	display: -webkit-box;
+	-webkit-line-clamp: $lines;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+@mixin panel-pattern($angle: 135deg) {
+	background-image: repeating-linear-gradient(
+		$angle,
+		$color-panel 0,
+		$color-panel 3.18%,
+		$color-panel-2 3.18%,
+		$color-panel-2 6.37%
+	);
+}
+
+@mixin button-dark {
+	background-image:
+		linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%),
+		linear-gradient(90deg, $color-liner-btn 0%, $color-liner-btn 100%);
+	color: $color-white;
+}

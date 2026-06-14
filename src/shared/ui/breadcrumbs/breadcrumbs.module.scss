@@ -1,0 +1,30 @@
+@use 'shared/styles' as *;
+
+.crumbs {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: $space-8;
+}
+
+.link {
+	@include text-body;
+	white-space: nowrap;
+	color: $color-brown-light;
+	transition: color $transition-fast;
+
+	@include hover {
+		color: $color-black;
+	}
+}
+
+.current {
+	@include text-body;
+	white-space: nowrap;
+	color: $color-black;
+}
+
+.sep {
+	@include text-body;
+	color: $color-baige;
+}

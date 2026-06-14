@@ -1,0 +1,97 @@
+@use 'shared/styles' as *;
+
+.section {
+	display: flex;
+	flex-direction: column;
+	gap: $space-24;
+	padding-block: $space-64;
+
+	@include mobile {
+		padding-block: $space-32;
+	}
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: $space-16;
+
+	@include mobile {
+		grid-template-columns: 1fr;
+	}
+}
+
+.item {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 180rem;
+	padding: $space-20;
+	border: $border-width solid $color-black;
+	border-radius: $radius-12;
+	transition: background-color $transition-fast;
+
+	@include hover {
+		background: $color-gray-light;
+		svg {
+			transform: translateX(4rem);
+		}
+	}
+}
+
+.top {
+	@include flex-between;
+	align-items: flex-start;
+}
+
+.ico {
+	position: relative;
+	width: 52rem;
+	height: 52rem;
+	overflow: hidden;
+	border: $border-width solid $color-black;
+	border-radius: $radius-8;
+	background: $color-gray-light;
+}
+
+.icoImage {
+	object-fit: cover;
+}
+
+.count {
+	@include mono;
+	color: $color-brown-light;
+}
+
+.bottom {
+	display: flex;
+	flex-direction: column;
+	gap: $space-8;
+}
+
+.title {
+	@include card-title;
+	color: $color-black;
+}
+
+.go {
+	display: flex;
+	align-items: center;
+	gap: $space-4;
+	@include text-semibold;
+	color: $color-black;
+}
+
+.goIcon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 16rem;
+	height: 14rem;
+
+	svg {
+		width: 9rem;
+		height: 8rem;
+		transition: transform $transition-fast;
+	}
+}

@@ -1,0 +1,50 @@
+@use 'shared/styles' as *;
+
+.sidebar {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	border: $border-width solid $color-black;
+	border-radius: $radius-12;
+}
+
+.tab {
+	@include reset-button;
+	@include flex-between;
+	@include text-medium;
+	padding: 16rem 20rem;
+	border-bottom: $border-width solid $color-border;
+	color: $color-black;
+	text-align: left;
+	transition: background-color $transition-fast;
+
+	@include hover {
+		background: $color-gray-light;
+	}
+}
+
+.tabActive {
+	background: $color-gray-light;
+
+	@include hover {
+		background: $color-gray-light;
+	}
+}
+
+.count {
+	@include text-body;
+	color: $color-baige;
+}
+
+.logout {
+	@include reset-button;
+	@include text-medium;
+	padding: 16rem 20rem;
+	color: $color-brown-light;
+	text-align: left;
+	transition: color $transition-fast;
+
+	@include hover {
+		color: $color-black;
+	}
+}

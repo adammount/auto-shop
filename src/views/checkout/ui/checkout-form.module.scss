@@ -1,0 +1,66 @@
+@use 'shared/styles' as *;
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: $space-24;
+}
+
+.section {
+	display: flex;
+	flex-direction: column;
+	gap: $space-16;
+	align-items: flex-start;
+}
+
+.sectionTitle {
+	display: flex;
+	align-items: center;
+	gap: $space-12;
+	width: 100%;
+	padding-bottom: 14rem;
+	border-bottom: $border-width solid $color-black;
+
+	@include mobile {
+		justify-content: space-between;
+		padding-bottom: $space-12;
+	}
+}
+
+.sectionNum {
+	@include mono;
+	color: $color-brown-light;
+}
+
+.sectionHeading {
+	font-family: $font-heading;
+	font-weight: 400;
+	font-size: 19rem;
+	line-height: 28rem;
+	letter-spacing: 0.76rem;
+	text-transform: uppercase;
+	color: $color-black;
+}
+
+.row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 18rem;
+	width: 100%;
+
+	@include mobile {
+		grid-template-columns: 1fr;
+		gap: $space-16;
+	}
+}
+
+.radios {
+	display: flex;
+	flex-direction: column;
+	gap: $space-12;
+}
+
+.error {
+	@include caption;
+	color: $color-error;
+}

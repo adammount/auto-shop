@@ -1,0 +1,57 @@
+@use 'shared/styles' as *;
+
+.checkbox {
+	display: flex;
+	align-items: flex-start;
+	gap: $space-12;
+	width: 100%;
+	cursor: pointer;
+}
+
+.input {
+	position: absolute;
+	width: 0;
+	height: 0;
+	opacity: 0;
+}
+
+.box {
+	@include flex-center;
+	flex-shrink: 0;
+	width: 22rem;
+	height: 22rem;
+	border: $border-width solid $color-black;
+	border-radius: $radius-4;
+	background: $color-white;
+}
+
+.check {
+	display: block;
+	width: 12rem;
+	height: 10rem;
+	color: $color-green-light;
+	opacity: 0;
+	transition: opacity $transition-fast;
+}
+
+.input:checked + .box .check {
+	opacity: 1;
+}
+
+.text {
+	display: flex;
+	flex: 1;
+	min-width: 0;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+
+.label {
+	@include text-medium;
+	color: $color-black;
+}
+
+.count {
+	@include caption;
+	color: $color-baige;
+}

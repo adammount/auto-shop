@@ -1,0 +1,51 @@
+@use 'shared/styles' as *;
+
+.screen {
+	@include container;
+	padding-block: $space-32 $space-64;
+
+	@include mobile {
+		padding-block: $space-24 $space-32;
+	}
+}
+
+.top {
+	display: flex;
+	flex-direction: column;
+	gap: $space-16;
+	padding-bottom: $space-32;
+}
+
+.titleRow {
+	@include flex-between;
+	align-items: flex-end;
+}
+
+.title {
+	@include page-title;
+	color: $color-black;
+}
+
+.count {
+	@include text-body;
+	white-space: nowrap;
+	color: $color-brown-light;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: 280rem 1fr;
+	gap: $space-32;
+	align-items: start;
+
+	@include mobile {
+		grid-template-columns: 1fr;
+		gap: 0;
+	}
+}
+
+.sidebar {
+	@include mobile {
+		display: none;
+	}
+}

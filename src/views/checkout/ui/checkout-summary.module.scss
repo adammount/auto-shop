@@ -1,0 +1,278 @@
+@use 'shared/styles' as *;
+
+.summary {
+	position: sticky;
+	top: $space-24;
+	overflow: hidden;
+	border: $border-width solid $color-black;
+	border-radius: $radius-12;
+
+	@include mobile {
+		position: static;
+	}
+}
+
+.head {
+	@include flex-between;
+	padding: $space-20 $space-20 $space-21;
+	border-bottom: $border-width solid $color-black;
+
+	@include mobile {
+		padding: $space-24 $space-12 $space-16;
+	}
+}
+
+.title {
+	font-family: $font-sans;
+	font-weight: 600;
+	font-size: 19rem;
+	line-height: 1.3;
+	letter-spacing: -0.19rem;
+	color: $color-black;
+}
+
+.count {
+	@include text-body;
+	color: $color-brown-light;
+
+	@include mobile {
+		@include mono;
+		font-size: 11rem;
+		line-height: 17rem;
+		letter-spacing: -0.11rem;
+	}
+}
+
+.items {
+	display: flex;
+	flex-direction: column;
+	max-height: 320rem;
+	padding: $space-16 $space-20;
+	overflow-y: auto;
+
+	@include mobile {
+		max-height: none;
+		padding: $space-16 $space-12;
+		overflow-y: visible;
+	}
+}
+
+.line {
+	display: grid;
+	grid-template-columns: 48rem minmax(0, 1fr) auto;
+	gap: $space-12;
+	align-items: center;
+	padding-block: $space-12;
+
+	&:not(:last-child) {
+		border-bottom: $border-width solid $color-border;
+	}
+}
+
+.thumb {
+	@include panel-pattern;
+	position: relative;
+	width: 48rem;
+	height: 48rem;
+	overflow: hidden;
+	border: $border-width solid $color-black;
+	border-radius: $radius-4;
+}
+
+.thumbMedia {
+	object-fit: cover;
+}
+
+.lineInfo {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.lineTitle {
+	@include text-medium;
+	font-size: 13rem;
+	line-height: 16rem;
+	color: $color-black;
+}
+
+.lineMeta {
+	@include caption;
+	color: $color-brown-light;
+}
+
+.linePrice {
+	@include text-semibold;
+	color: $color-black;
+	white-space: nowrap;
+}
+
+.promo {
+	display: flex;
+	gap: $space-8;
+	padding: 17rem $space-20 $space-16;
+	border-top: $border-width solid $color-border;
+
+	@include mobile {
+		gap: $space-16;
+		padding: $space-16 $space-12;
+	}
+}
+
+.promoInput {
+	flex: 1;
+	min-width: 0;
+	height: 50rem;
+	padding: 17rem;
+	border: $border-width solid $color-black;
+	border-radius: $radius-8;
+	background: $color-white;
+	@include text-medium;
+	color: $color-black;
+
+	&::placeholder {
+		color: $color-baige;
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	@include mobile {
+		height: 52rem;
+	}
+}
+
+.promoButton {
+	@include reset-button;
+	@include flex-center;
+	@include text-semibold-15;
+	width: 120rem;
+	height: 50rem;
+	border: $border-width solid $color-black;
+	border-radius: $radius-10;
+	color: $color-black;
+	transition: background-color $transition-fast;
+
+	@include hover {
+		background: $color-gray-light;
+	}
+
+	@include mobile {
+		width: auto;
+		height: 52rem;
+		padding-inline: $space-16;
+	}
+}
+
+.totals {
+	display: flex;
+	flex-direction: column;
+	gap: $space-12;
+	padding: $space-21 $space-20 $space-20;
+	border-top: $border-width solid $color-black;
+
+	@include mobile {
+		padding: $space-21 $space-12 $space-20;
+	}
+}
+
+.totalRow {
+	@include flex-between;
+}
+
+.totalKey {
+	@include text-medium;
+	color: $color-brown-light;
+}
+
+.totalValue {
+	@include text-medium;
+	color: $color-black;
+}
+
+.grandRow {
+	@include flex-between;
+	padding-top: 13rem;
+	border-top: $border-width solid $color-black;
+}
+
+.grandKey,
+.grandValue {
+	font-family: $font-sans;
+	font-weight: 700;
+	font-size: 19rem;
+	line-height: 28rem;
+	color: $color-black;
+}
+
+.foot {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: $space-12;
+	padding: 0 $space-20 $space-20;
+
+	@include mobile {
+		padding: 0 $space-12 $space-24;
+	}
+}
+
+.submit {
+	@include reset-button;
+	@include flex-center;
+	@include button-text;
+	width: 100%;
+	height: 56rem;
+	border-radius: $radius-10;
+	@include button-dark;
+	transition: opacity $transition-fast;
+
+	@include hover {
+		opacity: 0.92;
+	}
+
+	&:disabled {
+		opacity: 0.4;
+		cursor: default;
+	}
+}
+
+.empty {
+	padding: $space-12 0;
+	@include text-body;
+	color: $color-brown-light;
+}
+
+.promoError {
+	padding: 0 $space-20;
+	@include caption;
+	color: $color-error;
+	margin-bottom: $space-8;
+
+	@include mobile {
+		padding-inline: $space-12;
+	}
+}
+
+.promoOk {
+	padding: 0 $space-20;
+	@include caption;
+	color: $color-green;
+	margin-bottom: $space-8;
+
+	@include mobile {
+		padding-inline: $space-12;
+	}
+}
+
+.discount {
+	color: $color-green;
+}
+
+.note {
+	@include caption;
+	max-width: 280rem;
+	text-align: center;
+	color: $color-brown-light;
+}

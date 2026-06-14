@@ -1,0 +1,79 @@
+@use 'shared/styles' as *;
+
+.aside {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: $space-48;
+	border-right: $border-width solid $color-black;
+	background: $color-gray-light;
+
+	@include mobile {
+		display: none;
+	}
+}
+
+.top {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 7rem 9rem;
+	border: $border-width solid $color-blue;
+	border-radius: $radius-full;
+	@include badge-upper;
+	color: $color-blue;
+}
+
+.title {
+	margin-top: $space-24;
+	font-family: $font-heading;
+	font-weight: 700;
+	font-size: 40rem;
+	line-height: 48rem;
+	letter-spacing: 0.2rem;
+	text-transform: uppercase;
+	color: $color-black;
+}
+
+.points {
+	display: flex;
+	flex-direction: column;
+	gap: $space-16;
+	margin-top: $space-32;
+}
+
+.point {
+	display: flex;
+	gap: $space-12;
+}
+
+.pointNum {
+	@include mono;
+	color: $color-blue;
+}
+
+.pointText {
+	@include text-medium;
+	color: $color-black;
+}
+
+.help {
+	@include text-body;
+	max-width: 324rem;
+	color: $color-brown-light;
+}
+
+.helpLink {
+	color: $color-black;
+	text-decoration: underline;
+	transition: color $transition-fast;
+
+	@include hover {
+		color: $color-orange;
+	}
+}

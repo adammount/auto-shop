@@ -1,0 +1,10 @@
+@use 'shared/styles' as *;
+
+.screen {
+	@include container;
+	padding-top: $space-32;
+
+	@include mobile {
+		padding-top: $space-24;
+	}
+}

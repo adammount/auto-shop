@@ -1,0 +1,80 @@
+@use 'shared/styles' as *;
+
+.actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: $space-12;
+	align-items: center;
+
+	@include mobile {
+		justify-content: space-between;
+	}
+}
+
+.actions .stepper {
+	@include mobile {
+		order: 1;
+		height: 48rem;
+	}
+}
+
+.cart {
+	@include reset-button;
+	@include flex-center;
+	@include button-text;
+	gap: $space-8;
+	flex: 1;
+	min-width: 200rem;
+	height: 56rem;
+	border-radius: $radius-10;
+	border: $border-width solid $color-white;
+	@include button-dark;
+	transition: opacity $transition-fast;
+
+	@include hover {
+		opacity: 0.92;
+	}
+
+	@include mobile {
+		order: 3;
+		flex-basis: 100%;
+		min-width: 0;
+		height: 48rem;
+	}
+}
+
+.favorite {
+	@include flex-center;
+	@include reset-button;
+	width: 56rem;
+	height: 56rem;
+	border: $border-width solid $color-black;
+	border-radius: $radius-8;
+	color: $color-black;
+	transition: background-color $transition-fast;
+
+	@include hover {
+		background: $color-gray-light;
+	}
+
+	@include mobile {
+		order: 2;
+		width: 48rem;
+		height: 48rem;
+	}
+}
+
+.favoriteActive {
+	border-color: $color-orange;
+	color: $color-orange;
+
+	.favoriteIcon svg {
+		fill: $color-orange;
+	}
+}
+
+.favoriteIcon {
+	display: block;
+	width: 20rem;
+	height: 16rem;
+}

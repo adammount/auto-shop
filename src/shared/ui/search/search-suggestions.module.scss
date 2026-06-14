@@ -1,0 +1,79 @@
+@use 'shared/styles' as *;
+
+.dropdown {
+	position: absolute;
+	top: calc(100% + 8rem);
+	left: 0;
+	right: 0;
+	z-index: $z-header;
+	overflow: hidden;
+	border: $border-width solid $color-black;
+	border-radius: $radius-12;
+	background: $color-white;
+	box-shadow: 0 12rem 32rem rgba(22, 19, 15, 0.12);
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	max-height: 360rem;
+	overflow-y: auto;
+}
+
+.item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: $space-12;
+	padding: $space-12 $space-16;
+	transition: background-color $transition-fast;
+
+	@include hover {
+		background: $color-gray-light;
+	}
+}
+
+.itemInfo {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	gap: 1rem;
+}
+
+.itemTitle {
+	@include text-medium;
+	color: $color-black;
+}
+
+.itemMeta {
+	@include mono;
+	color: $color-brown-light;
+}
+
+.itemPrice {
+	@include text-semibold;
+	color: $color-black;
+	white-space: nowrap;
+}
+
+.empty {
+	padding: $space-16;
+	@include text-body;
+	color: $color-brown-light;
+}
+
+.showAll {
+	@include reset-button;
+	@include text-semibold;
+	display: block;
+	width: 100%;
+	padding: $space-16;
+	border-top: $border-width solid $color-border;
+	color: $color-black;
+	text-align: left;
+	transition: background-color $transition-fast;
+
+	@include hover {
+		background: $color-gray-light;
+	}
+}

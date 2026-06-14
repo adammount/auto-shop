@@ -1,0 +1,211 @@
+@use 'shared/styles' as *;
+
+.status {
+	display: flex;
+	gap: $space-12;
+	padding: 17rem;
+	border: $border-width solid $color-black;
+	border-radius: $radius-12;
+}
+
+.statusIcon {
+	display: block;
+	flex-shrink: 0;
+	width: 20rem;
+	height: 20rem;
+	color: $color-black;
+}
+
+.statusText {
+	display: flex;
+	flex-direction: column;
+	gap: $space-4;
+}
+
+.statusTitle {
+	@include text-medium;
+	font-size: 13rem;
+	line-height: 20rem;
+	color: $color-black;
+}
+
+.statusNote {
+	@include text-body;
+	color: $color-brown-light;
+}
+
+.statusLink {
+	text-decoration: underline;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	gap: $space-24;
+	padding: 25rem;
+	border: $border-width solid $color-black;
+	border-radius: $radius-12;
+}
+
+.cardTitle {
+	font-family: $font-sans;
+	font-weight: 600;
+	font-size: 19rem;
+	line-height: 1.3;
+	letter-spacing: -0.19rem;
+	color: $color-black;
+}
+
+.profileGrid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: $space-16 18rem;
+}
+
+.orders {
+	display: flex;
+	flex-direction: column;
+}
+
+.order {
+	display: flex;
+	align-items: center;
+	gap: $space-16;
+	padding-block: 16rem;
+
+	&:not(:last-child) {
+		border-bottom: $border-width solid $color-border;
+	}
+
+	@include mobile {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		align-items: center;
+		justify-items: start;
+		gap: $space-12;
+	}
+}
+
+.orderInfo {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	min-width: 0;
+	gap: 1rem;
+
+	@include mobile {
+		grid-column: 1;
+		grid-row: 1;
+	}
+}
+
+.orderNumber {
+	@include mono;
+	color: $color-black;
+}
+
+.orderMeta {
+	@include caption;
+	color: $color-brown-light;
+}
+
+.orderTotal {
+	@include text-bold;
+	color: $color-black;
+	white-space: nowrap;
+
+	@include mobile {
+		grid-column: 2;
+		grid-row: 1;
+		justify-self: end;
+	}
+}
+
+.orderRepeat {
+	height: 38rem;
+	padding-inline: 17rem;
+	@include text-semibold;
+
+	@include mobile {
+		grid-column: 1 / -1;
+		grid-row: 3;
+		justify-self: stretch;
+		width: 100%;
+	}
+}
+
+.favoritesGrid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	column-gap: $space-20;
+	row-gap: $space-24;
+
+	@include mobile {
+		grid-template-columns: 1fr;
+		row-gap: $space-24;
+	}
+}
+
+.empty {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: $space-12;
+
+	@include mobile {
+		align-items: stretch;
+	}
+}
+
+.emptyText {
+	@include text-medium;
+	color: $color-black;
+}
+
+.emptyNote {
+	@include text-body;
+	color: $color-brown-light;
+}
+
+.emptyButton {
+	margin-top: $space-4;
+}
+
+.points {
+	display: flex;
+	flex-direction: column;
+	gap: $space-12;
+}
+
+.point {
+	display: flex;
+	gap: $space-12;
+}
+
+.pointNum {
+	@include mono;
+	color: $color-brown-light;
+}
+
+.pointText {
+	@include text-medium;
+	color: $color-black;
+}
+
+.wholesaleButton {
+	align-self: flex-start;
+
+	@include mobile {
+		align-self: stretch;
+		width: 100%;
+	}
+}
+
+.saveButton {
+	align-self: flex-start;
+
+	@include mobile {
+		align-self: stretch;
+		width: 100%;
+	}
+}

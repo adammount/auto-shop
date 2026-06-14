@@ -1,0 +1,43 @@
+@use 'shared/styles' as *;
+
+.field {
+	display: flex;
+	flex-direction: column;
+	gap: $space-6;
+	width: 100%;
+}
+
+.label {
+	@include text-medium;
+	font-size: 13rem;
+	line-height: 20rem;
+	color: $color-brown-light;
+}
+
+.input {
+	width: 100%;
+	height: 50rem;
+	padding: $space-16;
+	border: $border-width solid $color-black;
+	border-radius: $radius-8;
+	background: $color-white;
+	@include text-medium;
+	color: $color-black;
+
+	&::placeholder {
+		color: $color-baige;
+	}
+
+	&:focus {
+		outline: none;
+	}
+}
+
+.inputError {
+	border-color: $color-error;
+}
+
+.error {
+	@include caption;
+	color: $color-error;
+}

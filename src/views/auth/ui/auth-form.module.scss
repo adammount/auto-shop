@@ -1,0 +1,33 @@
+@use 'shared/styles' as *;
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: $space-16;
+}
+
+.intro {
+	@include text-body;
+	color: $color-brown-light;
+}
+
+.formError {
+	@include text-body;
+	color: $color-error;
+}
+
+.submit {
+	width: 100%;
+}
+
+.switch {
+	@include text-body;
+	text-align: center;
+	color: $color-brown-light;
+}
+
+.switchLink {
+	@include reset-button;
+	color: $color-black;
+	text-decoration: underline;
+}

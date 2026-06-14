@@ -1,0 +1,22 @@
+@use 'shared/styles' as *;
+
+.screen {
+	@include container;
+	padding-top: $space-32;
+
+	@include mobile {
+		padding-top: $space-24;
+	}
+}
+
+.layout {
+	display: grid;
+	grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+	column-gap: 40rem;
+	padding-block: $space-24 $space-48;
+
+	@include mobile {
+		grid-template-columns: 1fr;
+		row-gap: $space-24;
+	}
+}

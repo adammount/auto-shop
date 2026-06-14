@@ -1,0 +1,76 @@
+@use 'shared/styles' as *;
+
+.section {
+	display: flex;
+	flex-direction: column;
+	gap: $space-24;
+	padding-block: $space-64;
+
+	@include mobile {
+		padding-block: $space-32;
+	}
+}
+
+.rating {
+	@include text-body;
+	color: $color-brown-light;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: $space-16;
+
+	@include mobile {
+		grid-template-columns: 1fr;
+	}
+}
+
+.item {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: $space-24;
+	min-height: 198rem;
+	padding: $space-21;
+	border: $border-width solid $color-black;
+	border-radius: $radius-12;
+}
+
+.top {
+	display: flex;
+	flex-direction: column;
+	gap: $space-12;
+}
+
+.stars {
+	display: flex;
+	gap: $space-2;
+}
+
+.star {
+	display: block;
+	width: 16rem;
+	height: 16rem;
+	color: $color-yellow;
+}
+
+.text {
+	@include text-body;
+	color: $color-black;
+}
+
+.who {
+	display: flex;
+	flex-direction: column;
+}
+
+.author {
+	@include text-semibold;
+	color: $color-black;
+}
+
+.role {
+	@include caption;
+	color: $color-brown-light;
+}

@@ -1,0 +1,67 @@
+@use 'shared/styles' as *;
+
+.stepper {
+	display: flex;
+	align-items: center;
+	height: 56rem;
+	border: $border-width solid $color-black;
+	border-radius: $radius-full;
+	overflow: hidden;
+}
+
+.stepperSm {
+	height: 40rem;
+
+	.button {
+		width: 32rem;
+	}
+
+	.icon {
+		width: 12rem;
+		height: 12rem;
+	}
+
+	.value {
+		min-width: 36rem;
+		padding-inline: $space-4;
+	}
+}
+
+.button {
+	@include flex-center;
+	@include reset-button;
+	width: 42rem;
+	height: 100%;
+	color: $color-black;
+	transition: opacity $transition-fast;
+
+	&:disabled {
+		opacity: 0.3;
+		cursor: default;
+	}
+}
+
+.icon {
+	display: block;
+	width: 16rem;
+	height: 16rem;
+}
+
+.value {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: $space-6;
+	min-width: 44rem;
+	padding-inline: $space-8;
+}
+
+.count {
+	@include text-semibold-15;
+	color: $color-black;
+}
+
+.unit {
+	@include caption;
+	color: $color-brown-light;
+}

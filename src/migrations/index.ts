@@ -1,0 +1,21 @@
+import * as migration_20260612_174110_initial from './20260612_174110_initial';
+import * as migration_20260612_190641_image_url_fields from './20260612_190641_image_url_fields';
+import * as migration_20260614_090516_warehouse_photo from './20260614_090516_warehouse_photo';
+
+export const migrations = [
+  {
+    up: migration_20260612_174110_initial.up,
+    down: migration_20260612_174110_initial.down,
+    name: '20260612_174110_initial',
+  },
+  {
+    up: migration_20260612_190641_image_url_fields.up,
+    down: migration_20260612_190641_image_url_fields.down,
+    name: '20260612_190641_image_url_fields',
+  },
+  {
+    up: migration_20260614_090516_warehouse_photo.up,
+    down: migration_20260614_090516_warehouse_photo.down,
+    name: '20260614_090516_warehouse_photo'
+  },
+];

@@ -1,0 +1,230 @@
+@use 'shared/styles' as *;
+
+.info {
+	display: flex;
+	flex-direction: column;
+	gap: $space-20;
+}
+
+.head {
+	display: flex;
+	flex-direction: column;
+	gap: $space-12;
+	align-items: flex-start;
+}
+
+.brandRow {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: $space-8;
+
+	@include mobile {
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		width: 100%;
+	}
+}
+
+.brandBadge {
+	display: inline-flex;
+	align-items: center;
+	padding: 6rem 9rem 7rem;
+	border: $border-width solid $color-black;
+	border-radius: $radius-full;
+	background: $color-white;
+	@include badge-text;
+	color: $color-black;
+}
+
+.title {
+	@include hero-title;
+	font-size: 34rem;
+	line-height: 38rem;
+	letter-spacing: 0.17rem;
+	color: $color-black;
+}
+
+.art {
+	display: flex;
+	align-items: center;
+	gap: $space-8;
+}
+
+.artLabel {
+	@include mono;
+	color: $color-brown-light;
+}
+
+.artValue {
+	@include mono;
+	font-weight: 700;
+	color: $color-brown-light;
+}
+
+.copy {
+	@include flex-center;
+	@include reset-button;
+	width: 30rem;
+	height: 30rem;
+	border: $border-width solid $color-border;
+	border-radius: $radius-4;
+	color: $color-brown-light;
+	transition:
+		color $transition-fast,
+		border-color $transition-fast;
+
+	@include hover {
+		color: $color-black;
+		border-color: $color-black;
+	}
+}
+
+.copyIcon {
+	display: block;
+	width: 16rem;
+	height: 16rem;
+}
+
+.pricebox {
+	display: flex;
+	flex-direction: column;
+	gap: $space-16;
+	padding: $space-21;
+	border: $border-width solid $color-black;
+	border-radius: $radius-12;
+
+	@include mobile {
+		padding: 17rem 13rem;
+	}
+}
+
+.price {
+	display: flex;
+	align-items: center;
+	gap: $space-8;
+}
+
+.priceValue {
+	@include price-lg;
+	color: $color-black;
+}
+
+.priceUnit {
+	@include text-lg;
+	color: $color-brown-light;
+}
+
+.priceOld {
+	@include text-lg;
+	color: $color-brown-light;
+	text-decoration: line-through;
+}
+
+.notice {
+	display: flex;
+	align-items: center;
+	gap: $space-12;
+	padding: $space-16;
+	border: $border-width solid $color-blue;
+	border-radius: $radius-12;
+	background: $color-blue-tiny;
+
+	@include mobile {
+		align-items: flex-start;
+		gap: $space-8;
+		padding: 13rem;
+	}
+}
+
+.noticeIcon {
+	display: block;
+	flex-shrink: 0;
+	width: 20rem;
+	height: 20rem;
+	color: $color-blue-dark;
+}
+
+.noticeText {
+	@include caption;
+	color: $color-blue-dark;
+}
+
+.noticeLink {
+	text-decoration: underline;
+}
+
+.metaList {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: $space-24;
+	row-gap: $space-12;
+
+	@include mobile {
+		grid-template-columns: 1fr;
+	}
+}
+
+.metaRow {
+	@include flex-between;
+	align-items: flex-start;
+	padding: $space-8 0 9rem;
+	border-bottom: $border-width solid $color-border;
+}
+
+.metaKey {
+	@include text-body;
+	color: $color-brown-light;
+}
+
+.metaValue {
+	@include text-medium;
+	font-size: 13rem;
+	line-height: 20rem;
+	text-align: right;
+	color: $color-black;
+}
+
+.share {
+	display: flex;
+	align-items: center;
+	gap: $space-12;
+
+	@include mobile {
+		justify-content: space-between;
+		width: 100%;
+		align-items: flex-start;
+	}
+}
+
+.shareButtons {
+	display: flex;
+	align-items: center;
+	gap: $space-8;
+}
+
+.shareLabel {
+	@include label-upper-sm;
+	color: $color-brown-light;
+}
+
+.shareIconWrap {
+	@include flex-center;
+	@include reset-button;
+	width: 44rem;
+	height: 44rem;
+	border: $border-width solid $color-black;
+	border-radius: $radius-8;
+	color: $color-black;
+	transition: background-color $transition-fast;
+
+	@include hover {
+		background: $color-gray-light;
+	}
+}
+
+.shareIcon {
+	display: block;
+	width: 20rem;
+	height: 20rem;
+}

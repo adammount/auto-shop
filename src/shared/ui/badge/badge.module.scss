@@ -1,0 +1,51 @@
+@use 'shared/styles' as *;
+
+.badge {
+	display: inline-flex;
+	align-items: center;
+	gap: $space-6;
+	border-radius: $radius-full;
+	white-space: nowrap;
+}
+
+.success {
+	@include badge-text;
+	padding: $space-6 $space-8;
+	background: $color-green-tiny;
+	color: $color-green;
+}
+
+.warning {
+	@include badge-text;
+	padding: $space-6 $space-8;
+	background: $color-yellow-tiny;
+	color: $color-yellow;
+}
+
+.info {
+	@include badge-text;
+	padding: $space-6 $space-8;
+	background: $color-blue-tiny;
+	color: $color-blue;
+}
+
+.danger {
+	@include badge-text;
+	padding: $space-6 $space-8;
+	background: $color-error-tiny;
+	color: $color-error;
+}
+
+.dark {
+	@include badge-upper;
+	padding: 6rem 9rem 7rem;
+	background: $color-brown-dark;
+	color: $color-white;
+}
+
+.dot {
+	width: 7rem;
+	height: 7rem;
+	border-radius: $radius-full;
+	background: currentColor;
+}

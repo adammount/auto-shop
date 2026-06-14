@@ -1,0 +1,45 @@
+@use 'shared/styles' as *;
+
+@keyframes toast-in {
+	from {
+		opacity: 0;
+		transform: translateY(12rem) scale(0.98);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+.toast {
+	display: inline-flex;
+	align-items: center;
+	gap: $space-12;
+	padding: 14rem 18rem;
+	border-radius: $radius-12;
+	background: $color-brown-dark;
+	box-shadow: 0 8rem 24rem rgba(0, 0, 0, 0.16);
+	animation: toast-in 0.26s ease both;
+	transition:
+		opacity 0.28s ease,
+		transform 0.28s ease;
+}
+
+.leaving {
+	opacity: 0;
+	transform: translateY(8rem) scale(0.98);
+}
+
+.icon {
+	display: block;
+	flex-shrink: 0;
+	width: 14rem;
+	height: 12rem;
+	color: $color-green-light;
+}
+
+.message {
+	@include text-medium;
+	color: $color-white;
+}

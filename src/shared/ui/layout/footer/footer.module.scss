@@ -1,0 +1,204 @@
+@use 'shared/styles' as *;
+
+.footer {
+	border-top: $border-width solid $color-black;
+	background: $color-white;
+}
+
+.grid {
+	@include container;
+	display: grid;
+	grid-template-columns: 1.2fr 2fr;
+	gap: $space-48;
+	padding-block: 32rem;
+
+	@include mobile {
+		gap: $space-24;
+	}
+}
+
+.brand {
+	display: flex;
+	flex-direction: column;
+	gap: $space-12;
+	align-items: flex-start;
+}
+
+.brandName {
+	@include display-title;
+	color: $color-orange;
+
+	@include mobile {
+		font-size: 22rem;
+		line-height: 22rem;
+		letter-spacing: 1.32rem;
+	}
+}
+
+.brandText {
+	@include text-body;
+	color: $color-brown-light;
+	max-width: 224rem;
+
+	@include mobile {
+		font-size: 11rem;
+		line-height: 16rem;
+	}
+}
+
+.contacts {
+	display: flex;
+	flex-direction: column;
+	gap: $space-12;
+	padding-top: $space-12;
+}
+
+.contactRow {
+	display: flex;
+	align-items: center;
+	gap: $space-12;
+	@include text-medium;
+	color: $color-black;
+	transition: opacity $transition-base;
+
+	@include mobile {
+		gap: $space-4;
+		font-weight: 400;
+		font-size: 11rem;
+		line-height: 16rem;
+		white-space: nowrap;
+	}
+
+	@include hover {
+		opacity: 0.7;
+	}
+}
+
+.contactIcon {
+	display: block;
+	flex-shrink: 0;
+	width: 20rem;
+	height: 20rem;
+	color: $color-black;
+}
+
+.contactAt {
+	@include text-bold;
+	@include flex-center;
+	flex-shrink: 0;
+	width: 20rem;
+	height: 20rem;
+	color: $color-black;
+}
+
+.cols {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: $space-32;
+
+	@include mobile {
+		grid-template-columns: 1fr;
+		gap: $space-24;
+	}
+}
+
+.col {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: $space-12;
+
+	@include mobile {
+		gap: $space-8;
+	}
+}
+
+.colCatalog {
+	@include mobile {
+		display: none;
+	}
+}
+
+.colLabel {
+	@include label-upper-sm;
+	color: $color-brown-light;
+	padding-bottom: $space-6;
+}
+
+.colLink {
+	@include text-body;
+	color: $color-brown-light;
+	white-space: nowrap;
+	transition: color $transition-fast;
+
+	@include hover {
+		color: $color-black;
+	}
+}
+
+.address {
+	@include text-body;
+	font-style: normal;
+	color: $color-brown-light;
+}
+
+.map {
+	display: block;
+	width: 237rem;
+	height: 158rem;
+	margin-top: $space-12;
+	border: $border-width solid $color-black;
+	border-radius: $radius-10;
+	overflow: hidden;
+
+	@include mobile {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 105 / 70;
+		margin-top: 0;
+	}
+}
+
+.bottom {
+	@include container;
+	@include flex-between;
+	padding-top: 21rem;
+	padding-bottom: $space-20;
+	border-top: $border-width solid $color-border;
+
+	@include mobile {
+		align-items: flex-end;
+	}
+}
+
+.copyright {
+	@include text-body;
+	color: $color-brown-light;
+
+	@include mobile {
+		font-size: 11rem;
+		line-height: 16rem;
+	}
+}
+
+.copyrightRest {
+	@include mobile {
+		display: block;
+	}
+}
+
+.legal {
+	@include text-body;
+	white-space: nowrap;
+	color: $color-brown-light;
+	transition: color $transition-fast;
+
+	@include mobile {
+		font-size: 11rem;
+		line-height: 16rem;
+	}
+
+	@include hover {
+		color: $color-black;
+	}
+}

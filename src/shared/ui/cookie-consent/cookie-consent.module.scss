@@ -1,0 +1,45 @@
+@use 'shared/styles' as *;
+
+.banner {
+	position: fixed;
+	left: $space-24;
+	right: $space-24;
+	bottom: $space-24;
+	z-index: $z-modal;
+	display: flex;
+	align-items: center;
+	gap: $space-24;
+	max-width: 720rem;
+	margin-inline: auto;
+	padding: $space-20 $space-24;
+	border: $border-width solid $color-black;
+	border-radius: $radius-12;
+	background: $color-white;
+	box-shadow: 0 12rem 40rem rgba(22, 19, 15, 0.16);
+
+	@include mobile {
+		flex-direction: column;
+		align-items: stretch;
+		gap: $space-16;
+	}
+}
+
+.text {
+	@include text-body;
+	flex: 1;
+	color: $color-brown-light;
+}
+
+.link {
+	color: $color-black;
+	text-decoration: underline;
+	transition: color $transition-fast;
+
+	@include hover {
+		color: $color-orange;
+	}
+}
+
+.action {
+	flex-shrink: 0;
+}

@@ -1,0 +1,46 @@
+@use 'shared/styles' as *;
+
+.radio {
+	display: flex;
+	align-items: center;
+	gap: $space-12;
+	cursor: pointer;
+}
+
+.input {
+	position: absolute;
+	width: 0;
+	height: 0;
+	opacity: 0;
+}
+
+.box {
+	@include flex-center;
+	flex-shrink: 0;
+	width: 20rem;
+	height: 20rem;
+	border: 2rem solid $color-brown-dark;
+	border-radius: $radius-full;
+}
+
+.dot {
+	width: 10rem;
+	height: 10rem;
+	border-radius: $radius-full;
+	background: $color-brown-dark;
+	opacity: 0;
+	transition: opacity $transition-fast;
+}
+
+.input:checked + .box .dot {
+	opacity: 1;
+}
+
+.text {
+	@include text-medium;
+	color: $color-black;
+
+	strong {
+		font-weight: 700;
+	}
+}

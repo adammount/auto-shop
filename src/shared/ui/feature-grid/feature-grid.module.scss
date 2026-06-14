@@ -1,0 +1,44 @@
+@use 'shared/styles' as *;
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	overflow: hidden;
+	border: $border-width solid $color-black;
+	border-radius: $radius-12;
+
+	@include mobile {
+		grid-template-columns: 1fr;
+	}
+}
+
+.item {
+	display: flex;
+	flex-direction: column;
+	gap: $space-12;
+	padding: $space-24;
+
+	&:not(:first-child) {
+		border-left: $border-width solid $color-black;
+
+		@include mobile {
+			border-left: none;
+			border-top: $border-width solid $color-black;
+		}
+	}
+}
+
+.tag {
+	@include mono;
+	color: $color-brown-light;
+}
+
+.title {
+	@include card-title;
+	color: $color-black;
+}
+
+.text {
+	@include text-body;
+	color: $color-brown-light;
+}

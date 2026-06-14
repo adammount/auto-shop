@@ -1,0 +1,193 @@
+@use 'shared/styles' as *;
+
+.hero {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	border: $border-width solid $color-black;
+	border-radius: $radius-22;
+}
+
+.viewport {
+	overflow: hidden;
+}
+
+.track {
+	display: flex;
+}
+
+.slide {
+	display: grid;
+	flex: 0 0 100%;
+	min-width: 0;
+	grid-template-columns: 1.05fr 1fr;
+	min-height: 552rem;
+
+	@include mobile {
+		grid-template-columns: 1fr;
+		grid-template-rows: 240rem auto;
+		min-height: 0;
+	}
+}
+
+.text {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: $space-16;
+	padding: $space-48;
+
+	@include mobile {
+		grid-row: 2;
+		padding: $space-20 $space-12;
+	}
+}
+
+.badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 7rem 13rem;
+	border: $border-width solid $color-black;
+	border-radius: $radius-full;
+	background: $color-white;
+	@include badge-text;
+	color: $color-black;
+}
+
+.title {
+	@include hero-title;
+	color: $color-black;
+
+	@include mobile {
+		font-size: 34rem;
+		line-height: 38rem;
+		letter-spacing: 0.17rem;
+	}
+}
+
+.sub {
+	@include text-lg;
+	color: $color-brown-light;
+}
+
+.cta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: $space-12;
+	padding-top: $space-12;
+
+	@include mobile {
+		flex-direction: column;
+		align-items: stretch;
+		gap: $space-8;
+		width: 100%;
+	}
+}
+
+.ctaIcon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20rem;
+	height: 20rem;
+}
+
+.media {
+	@include flex-center;
+	@include panel-pattern(137deg);
+	position: relative;
+	overflow: hidden;
+	border-left: $border-width solid $color-black;
+
+	@include mobile {
+		grid-row: 1;
+		border-left: none;
+		border-bottom: $border-width solid $color-black;
+	}
+}
+
+.mediaImage {
+	object-fit: cover;
+}
+
+.mediaLabel {
+	@include mono;
+	padding: $space-4 9rem;
+	border: $border-width solid $color-border;
+	border-radius: $radius-4;
+	background: $color-white;
+	color: $color-baige;
+}
+
+.dots {
+	position: absolute;
+	bottom: 24rem;
+	left: $space-48;
+	display: flex;
+	gap: $space-8;
+
+	@include mobile {
+		top: 224rem;
+		bottom: auto;
+		left: $space-12;
+	}
+}
+
+.dot {
+	@include reset-button;
+	width: 28rem;
+	height: 4rem;
+	border-radius: 2rem;
+	background: $color-border;
+	transition:
+		width $transition-fast,
+		background-color $transition-fast;
+}
+
+.dotActive {
+	@extend .dot;
+	width: 44rem;
+	background: $color-black;
+}
+
+.nav {
+	position: absolute;
+	right: $space-20;
+	bottom: 20rem;
+	display: flex;
+	gap: $space-8;
+
+	@include mobile {
+		top: 184rem;
+		bottom: auto;
+		right: $space-12;
+	}
+}
+
+.arrow {
+	@include flex-center;
+	@include reset-button;
+	width: 44rem;
+	height: 44rem;
+	border: $border-width solid $color-black;
+	border-radius: $radius-8;
+	background: $color-white;
+	color: $color-black;
+	transition: background-color $transition-fast;
+
+	@include hover {
+		background: $color-gray-light;
+	}
+}
+
+.arrowIcon {
+	display: block;
+	width: 20rem;
+	height: 20rem;
+}
+
+.arrowIconPrev {
+	@extend .arrowIcon;
+	rotate: 180deg;
+}

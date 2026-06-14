@@ -1,0 +1,9 @@
+@use 'shared/styles' as *;
+
+.section {
+	padding-block: $space-64;
+
+	@include mobile {
+		padding-block: $space-32;
+	}
+}

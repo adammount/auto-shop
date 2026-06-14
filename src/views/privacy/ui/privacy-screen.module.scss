@@ -1,0 +1,87 @@
+@use 'shared/styles' as *;
+
+.screen {
+	@include container;
+	padding-block: $space-32 $space-64;
+
+	@include mobile {
+		padding-block: $space-24 $space-32;
+	}
+}
+
+.hero {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: $space-16;
+	padding-bottom: $space-48;
+
+	@include mobile {
+		padding-bottom: $space-32;
+	}
+}
+
+.title {
+	@include page-title;
+	color: $color-black;
+
+	@include mobile {
+		font-size: 26rem;
+		line-height: 30rem;
+	}
+}
+
+.lead {
+	@include text-lg;
+	max-width: 669rem;
+	color: $color-brown-light;
+}
+
+.sections {
+	display: flex;
+	flex-direction: column;
+}
+
+.section {
+	display: grid;
+	grid-template-columns: 48rem minmax(0, 1fr);
+	gap: $space-16;
+	padding-block: $space-24;
+	border-top: $border-width solid $color-border;
+
+	@include mobile {
+		grid-template-columns: 28rem minmax(0, 1fr);
+		gap: $space-12;
+		padding-block: $space-20;
+	}
+}
+
+.num {
+	@include mono;
+	padding-top: $space-4;
+	color: $color-brown-light;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	gap: $space-8;
+	max-width: 800rem;
+}
+
+.sectionTitle {
+	font-family: $font-sans;
+	font-weight: 600;
+	font-size: 19rem;
+	line-height: 1.3;
+	letter-spacing: -0.19rem;
+	color: $color-black;
+}
+
+.text {
+	font-family: $font-sans;
+	font-weight: 400;
+	font-size: 15rem;
+	line-height: 23rem;
+	color: $color-brown-light;
+}

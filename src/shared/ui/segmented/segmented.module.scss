@@ -1,0 +1,49 @@
+@use 'shared/styles' as *;
+
+.segmented {
+	display: inline-flex;
+	align-items: center;
+	gap: $space-2;
+	padding: 4rem 6rem;
+	border: $border-width solid $color-black;
+	border-radius: $radius-8;
+
+	@include mobile {
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+		padding: $space-8 $space-12;
+		border-radius: $radius-10;
+	}
+}
+
+.segment {
+	@include reset-button;
+	@include text-semibold;
+	padding: 8rem 14rem;
+	border-radius: $radius-full;
+	color: $color-brown-light;
+	transition:
+		color $transition-fast,
+		background-color $transition-fast;
+
+	@include hover {
+		color: $color-black;
+	}
+
+	@include mobile {
+		flex: 1;
+		padding: $space-16 0;
+		font-size: 13rem;
+		text-align: center;
+	}
+}
+
+.segmentActive {
+	background: $color-brown-dark;
+	color: $color-white;
+
+	@include hover {
+		color: $color-white;
+	}
+}

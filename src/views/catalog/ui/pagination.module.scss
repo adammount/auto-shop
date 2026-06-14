@@ -1,0 +1,73 @@
+@use 'shared/styles' as *;
+
+.pagination {
+	display: flex;
+	align-items: center;
+	gap: $space-8;
+}
+
+.page,
+.arrow {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 44rem;
+	height: 44rem;
+	padding: 0 $space-8;
+	border: $border-width solid $color-black;
+	border-radius: $radius-8;
+	background: $color-white;
+	color: $color-black;
+	transition:
+		color $transition-fast,
+		background-color $transition-fast;
+}
+
+.page {
+	@include text-medium;
+
+	@include hover {
+		background: $color-gray-light;
+	}
+}
+
+.pageActive {
+	background: $color-black;
+	color: $color-white;
+	cursor: default;
+
+	@include hover {
+		background: $color-black;
+	}
+}
+
+.arrow {
+	svg {
+		width: 13rem;
+		height: 11rem;
+	}
+
+	@include hover {
+		background: $color-gray-light;
+	}
+}
+
+.arrowPrev svg {
+	transform: rotate(180deg);
+}
+
+.arrowDisabled {
+	color: $color-baige;
+	border-color: $color-baige;
+	pointer-events: none;
+}
+
+.gap {
+	@include text-medium;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 24rem;
+	height: 44rem;
+	color: $color-brown-light;
+}

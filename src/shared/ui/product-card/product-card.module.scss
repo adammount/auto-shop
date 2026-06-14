@@ -1,0 +1,148 @@
+@use 'shared/styles' as *;
+
+.card {
+	display: flex;
+	flex-direction: column;
+	gap: $space-8;
+	background: $color-white;
+}
+
+.thumb {
+	position: relative;
+	aspect-ratio: 1;
+	overflow: hidden;
+	border: $border-width solid $color-black;
+	border-radius: $radius-4;
+
+	@include hover {
+		.imageMedia {
+			transform: scale(1.05);
+		}
+	}
+}
+
+.image {
+	@include flex-center;
+	@include panel-pattern;
+	position: absolute;
+	inset: 0;
+}
+
+.imageMedia {
+	object-fit: cover;
+	transition: transform $transition-base;
+}
+
+.imageLabel {
+	@include mono;
+	padding: $space-4 9rem;
+	border: $border-width solid $color-border;
+	border-radius: $radius-4;
+	background: $color-white;
+	color: $color-baige;
+}
+
+.badgeNew {
+	position: absolute;
+	top: $space-8;
+	left: $space-8;
+}
+
+.favorite {
+	@include flex-center;
+	@include reset-button;
+	position: absolute;
+	top: $space-8;
+	right: 7.5rem;
+	width: 36rem;
+	height: 36rem;
+	border: $border-width solid $color-black;
+	border-radius: $radius-8;
+	background: $color-white;
+	color: $color-black;
+	transition: background-color $transition-fast;
+
+	@include hover {
+		background: $color-gray-light;
+	}
+}
+
+.favoriteActive {
+	border-color: $color-orange;
+	color: $color-orange;
+
+	.favoriteIcon svg {
+		fill: $color-orange;
+	}
+}
+
+.favoriteIcon {
+	display: block;
+	width: 22rem;
+	height: 18rem;
+}
+
+.name {
+	display: block;
+	padding: 7rem 11rem 8rem;
+	border: $border-width solid $color-black;
+	border-radius: $radius-4;
+	color: $color-black;
+	transition: background-color $transition-base;
+
+	@include hover {
+		background: $color-gray-light;
+	}
+}
+
+.nameText {
+	@include text-semibold-15;
+	@include line-clamp(2);
+}
+
+.meta {
+	@include flex-between;
+	align-items: flex-end;
+}
+
+.specs {
+	display: flex;
+	flex-direction: column;
+	color: $color-brown-light;
+}
+
+.sku {
+	@include mono;
+}
+
+.brand {
+	@include text-body;
+}
+
+.price {
+	display: flex;
+	align-items: center;
+	gap: $space-8;
+}
+
+.priceValue {
+	@include price;
+	color: $color-black;
+}
+
+.priceUnit {
+	@include text-body;
+	letter-spacing: -0.19rem;
+	color: $color-brown-light;
+}
+
+.priceOld {
+	@include text-body;
+	color: $color-brown-light;
+	text-decoration: line-through;
+}
+
+.cta {
+	width: 100%;
+	margin-top: auto;
+}

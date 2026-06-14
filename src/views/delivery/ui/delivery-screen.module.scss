@@ -1,0 +1,40 @@
+@use 'shared/styles' as *;
+
+.screen {
+	@include container;
+	padding-block: $space-32 $space-64;
+
+	@include mobile {
+		padding-block: $space-24 $space-32;
+	}
+}
+
+.hero {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: $space-24;
+	padding-bottom: $space-48;
+
+	@include mobile {
+		gap: $space-16;
+		padding-bottom: $space-32;
+	}
+}
+
+.title {
+	@include hero-display;
+	color: $color-black;
+
+	@include mobile {
+		font-size: 44rem;
+		line-height: 44rem;
+		letter-spacing: 0.22rem;
+	}
+}
+
+.lead {
+	@include text-lg;
+	max-width: 669rem;
+	color: $color-brown-light;
+}

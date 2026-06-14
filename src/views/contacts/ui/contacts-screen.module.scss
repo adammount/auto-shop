@@ -1,0 +1,138 @@
+@use 'shared/styles' as *;
+
+.screen {
+	@include container;
+	padding-block: $space-32 $space-64;
+
+	@include mobile {
+		padding-block: $space-24 $space-32;
+	}
+}
+
+.hero {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: $space-16;
+	padding-bottom: $space-48;
+
+	@include mobile {
+		padding-bottom: $space-32;
+	}
+}
+
+.title {
+	@include hero-display;
+	color: $color-black;
+
+	@include mobile {
+		font-size: 44rem;
+		line-height: 44rem;
+		letter-spacing: 0.22rem;
+	}
+}
+
+.layout {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	gap: 40rem;
+	align-items: start;
+
+	@include mobile {
+		grid-template-columns: 1fr;
+		gap: $space-24;
+	}
+}
+
+.stack {
+	display: flex;
+	flex-direction: column;
+}
+
+.item {
+	display: flex;
+	flex-direction: column;
+	gap: $space-12;
+	padding-block: $space-24;
+
+	&:not(:last-of-type) {
+		border-bottom: $border-width solid $color-border;
+	}
+
+	&:first-child {
+		padding-top: 0;
+	}
+}
+
+.label {
+	@include label-upper-sm;
+	color: $color-brown-light;
+}
+
+.phone {
+	font-family: $font-sans;
+	font-weight: 700;
+	font-size: 19rem;
+	line-height: 26rem;
+	color: $color-black;
+}
+
+.text {
+	@include text-lg;
+	color: $color-brown-light;
+}
+
+.note {
+	@include text-body;
+	color: $color-brown-light;
+}
+
+.requisites {
+	@include mono;
+	color: $color-brown-light;
+}
+
+.actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: $space-12;
+	padding-top: $space-24;
+
+	@include mobile {
+		flex-wrap: nowrap;
+		gap: $space-8;
+		width: 100%;
+
+		> * {
+			padding-inline: $space-16;
+			font-size: 13rem;
+			letter-spacing: -0.13rem;
+		}
+
+		> *:first-child {
+			flex: 1;
+			padding-inline: $space-8;
+		}
+	}
+}
+
+.map {
+	@include flex-center;
+	@include panel-pattern;
+	aspect-ratio: 580 / 436;
+	border: $border-width solid $color-black;
+	border-radius: $radius-22;
+
+	@include mobile {
+		aspect-ratio: 340 / 255;
+	}
+}
+
+.mapLabel {
+	@include mono;
+	padding: $space-4 9rem;
+	border: $border-width solid $color-border;
+	border-radius: $radius-4;
+	background: $color-white;
+	color: $color-baige;
+}

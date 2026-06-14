@@ -1,0 +1,22 @@
+@use 'shared/styles' as *;
+
+.menu {
+	display: flex;
+	flex-direction: column;
+	padding: $space-8 $space-20;
+}
+
+.link {
+	@include text-medium;
+	padding-block: $space-16;
+	color: $color-black;
+	transition: color $transition-fast;
+
+	&:not(:last-child) {
+		border-bottom: $border-width solid $color-border;
+	}
+
+	@include hover {
+		color: $color-orange;
+	}
+}

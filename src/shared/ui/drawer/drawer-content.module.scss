@@ -1,0 +1,166 @@
+@use 'shared/styles' as *;
+
+.wrap {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	padding: $space-8 $space-20;
+}
+
+.line {
+	display: flex;
+	gap: $space-16;
+	padding-block: $space-16;
+
+	&:not(:last-child) {
+		border-bottom: $border-width solid $color-border;
+	}
+}
+
+.thumb {
+	@include panel-pattern;
+	position: relative;
+	flex-shrink: 0;
+	width: 64rem;
+	height: 64rem;
+	overflow: hidden;
+	border: $border-width solid $color-black;
+	border-radius: $radius-4;
+}
+
+.thumbMedia {
+	object-fit: cover;
+}
+
+.info {
+	display: flex;
+	flex-direction: column;
+	gap: $space-4;
+	flex: 1;
+	min-width: 0;
+}
+
+.title {
+	@include text-medium;
+	color: $color-black;
+	transition: color $transition-fast;
+
+	@include hover {
+		color: $color-orange;
+	}
+}
+
+.meta {
+	@include caption;
+	color: $color-brown-light;
+}
+
+.controls {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: $space-8;
+	margin-top: $space-4;
+}
+
+.remove {
+	@include flex-center;
+	@include reset-button;
+	align-self: flex-start;
+	flex-shrink: 0;
+	width: 38rem;
+	height: 38rem;
+	border: $border-width solid $color-border;
+	border-radius: $radius-8;
+	color: $color-brown-light;
+	transition:
+		color $transition-base,
+		border-color $transition-base;
+
+	@include hover {
+		color: $color-black;
+		border-color: $color-black;
+	}
+}
+
+.removeIcon {
+	display: block;
+	width: 10rem;
+	height: 10rem;
+}
+
+.price {
+	@include text-bold;
+	color: $color-black;
+	white-space: nowrap;
+}
+
+.favRow {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: $space-12;
+	margin-top: $space-4;
+}
+
+.favPrice {
+	@include price;
+	color: $color-black;
+	white-space: nowrap;
+
+	@include mobile {
+		font-size: 17rem;
+	}
+}
+
+.favAdd {
+	flex-shrink: 0;
+}
+
+.footer {
+	position: sticky;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	gap: $space-16;
+	padding: $space-20;
+	border-top: $border-width solid $color-black;
+	background: $color-white;
+}
+
+.totalRow {
+	@include flex-between;
+}
+
+.totalLabel {
+	@include text-bold;
+	color: $color-black;
+}
+
+.totalValue {
+	font-family: $font-sans;
+	font-weight: 700;
+	font-size: 19rem;
+	line-height: 28rem;
+	color: $color-black;
+}
+
+.checkout {
+	@include flex-center;
+	@include button-text;
+	height: 56rem;
+	border: $border-width solid $color-white;
+	border-radius: $radius-10;
+	@include button-dark;
+	transition: opacity $transition-base;
+
+	@include hover {
+		opacity: 0.92;
+	}
+}

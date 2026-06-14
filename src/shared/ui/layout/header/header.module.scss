@@ -1,0 +1,274 @@
+@use 'shared/styles' as *;
+
+.header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: $color-white;
+}
+
+.container {
+	@include container;
+	display: flex;
+	align-items: flex-end;
+	gap: $space-16;
+	padding-block: $space-12;
+
+	@include mobile {
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+	}
+}
+
+.left {
+	display: flex;
+	align-items: center;
+	gap: $space-16;
+}
+
+.search {
+	margin-right: auto;
+
+	@include mobile {
+		order: 1;
+		flex-basis: 100%;
+		margin-right: 0;
+	}
+}
+
+.burger {
+	@include flex-center;
+	@include reset-button;
+	display: none;
+	flex-shrink: 0;
+	width: 38rem;
+	height: 38rem;
+	border-radius: $radius-8;
+	color: $color-black;
+
+	@include mobile {
+		display: flex;
+	}
+}
+
+.burgerIcon {
+	display: block;
+	width: 18rem;
+	height: 12rem;
+}
+
+.iconWrap {
+	@include flex-center;
+	@include reset-button;
+	flex-shrink: 0;
+	width: 38rem;
+	height: 38rem;
+	border-radius: $radius-8;
+	color: $color-black;
+}
+
+.iconButton {
+	position: relative;
+}
+
+.badge {
+	position: absolute;
+	top: 2rem;
+	right: 2rem;
+	min-width: 16rem;
+	height: 16rem;
+	padding-inline: 4rem;
+	border-radius: $radius-full;
+	background: $color-orange;
+	color: $color-white;
+	@include badge-text;
+	font-size: 10rem;
+	line-height: 16rem;
+	text-align: center;
+}
+
+.cartBadge {
+	@include desktop {
+		right: 72rem;
+	}
+}
+
+.icon {
+	display: block;
+	width: 20rem;
+	height: 20rem;
+}
+
+.iconHeart {
+	display: block;
+	width: 20rem;
+	height: 16rem;
+}
+
+.iconCart {
+	display: block;
+	width: 14rem;
+	height: 18rem;
+}
+
+.logo {
+	display: flex;
+	flex-direction: column;
+	gap: $space-6;
+	flex-shrink: 0;
+}
+
+.logoName {
+	@include logo;
+	color: $color-orange;
+}
+
+.logoSub {
+	@include caption-upper;
+	color: $color-brown-light;
+}
+
+.actions {
+	display: flex;
+	align-items: flex-end;
+	gap: $space-8;
+}
+
+.toggle {
+	display: flex;
+	flex-direction: column;
+	gap: $space-2;
+
+	@include mobile {
+		display: none;
+	}
+}
+
+.toggleLabel {
+	@include label-upper;
+	color: $color-brown-light;
+}
+
+.segmented {
+	display: flex;
+	gap: $space-2;
+	padding: 4rem;
+	border: $border-width solid $color-black;
+	border-radius: $radius-full;
+}
+
+.segment {
+	@include text-semibold;
+	padding: 6rem 14rem;
+	border-radius: $radius-full;
+	color: $color-brown-light;
+	transition: color $transition-fast;
+}
+
+.segmentActive {
+	background: $color-brown-dark;
+	color: $color-white;
+}
+
+.cart {
+	@include reset-button;
+	display: flex;
+	align-items: center;
+	height: 38rem;
+	border-radius: $radius-full;
+	background: $color-panel;
+}
+
+.cartIconWrap {
+	@include flex-center;
+	flex-shrink: 0;
+	width: 38rem;
+	height: 38rem;
+	border-radius: $radius-8;
+	background: $color-white;
+	color: $color-black;
+}
+
+.cartSum {
+	@include text-semibold;
+	padding-inline: $space-8;
+	color: $color-black;
+
+	@include mobile {
+		display: none;
+	}
+}
+
+.nav {
+	width: 100%;
+	border-top: $border-width solid $color-border;
+
+	@include mobile {
+		display: none;
+	}
+}
+
+.navContainer {
+	@include container;
+	display: flex;
+	align-items: center;
+	gap: $space-24;
+	height: 52rem;
+}
+
+.navCatalog {
+	@include text-semibold-15;
+	flex-shrink: 0;
+	color: $color-black;
+}
+
+.navLinks {
+	display: flex;
+	flex: 1;
+	min-width: 0;
+	gap: $space-20;
+	align-items: center;
+}
+
+.navLink {
+	@include text-body;
+	white-space: nowrap;
+	color: $color-brown-light;
+	transition: color $transition-fast;
+
+	@include hover {
+		color: $color-black;
+	}
+}
+
+.navAccount {
+	display: flex;
+	align-items: center;
+	gap: $space-4;
+	flex-shrink: 0;
+	@include text-semibold;
+	color: $color-black;
+
+	svg {
+		width: 9rem;
+		height: 8rem;
+		transition: transform $transition-fast;
+	}
+
+	@include hover {
+		opacity: 0.7;
+
+		svg {
+			transform: translateX(2rem);
+		}
+	}
+}
+
+.navAccountIcon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 16rem;
+	height: 14rem;
+}

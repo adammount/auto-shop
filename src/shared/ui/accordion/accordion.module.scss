@@ -1,0 +1,82 @@
+@use 'shared/styles' as *;
+
+.accordion {
+	border-top: $border-width solid $color-black;
+}
+
+.item {
+	border-bottom: $border-width solid $color-black;
+
+	&:last-child {
+		border-bottom: none;
+	}
+}
+
+.head {
+	@include reset-button;
+	display: flex;
+	align-items: center;
+	gap: $space-16;
+	width: 100%;
+	padding-block: $space-20;
+	text-align: left;
+}
+
+.num {
+	@include mono;
+	color: $color-brown-light;
+}
+
+.title {
+	flex: 1;
+	min-width: 0;
+	font-family: $font-sans;
+	font-weight: 600;
+	font-size: 19rem;
+	line-height: 1.3;
+	letter-spacing: -0.19rem;
+	color: $color-black;
+}
+
+.icon {
+	@include flex-center;
+	flex-shrink: 0;
+	width: 38rem;
+	height: 38rem;
+	border: $border-width solid $color-black;
+	border-radius: $radius-8;
+	color: $color-black;
+
+	span,
+	svg {
+		width: 18rem;
+		height: 18rem;
+	}
+}
+
+.body {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: grid-template-rows $transition-base;
+}
+
+.bodyOpen {
+	grid-template-rows: 1fr;
+}
+
+.bodyInner {
+	overflow: hidden;
+	min-height: 0;
+}
+
+.content {
+	@include text-medium;
+	padding: 0 32rem 40rem;
+	color: $color-brown-light;
+	opacity: 0;
+	transition: opacity $transition-fast;
+
+	.bodyOpen & {
+		opacity: 1;
+	}
+}

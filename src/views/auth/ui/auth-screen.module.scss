@@ -1,0 +1,101 @@
+@use 'shared/styles' as *;
+
+.screen {
+	@include container;
+	@include flex-center;
+	padding-block: $space-32 $space-64;
+
+	@include mobile {
+		align-items: stretch;
+		padding-block: $space-24 $space-32;
+	}
+}
+
+.card {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	width: 1000rem;
+	max-width: 100%;
+	overflow: hidden;
+	border: $border-width solid $color-black;
+	border-radius: $radius-22;
+
+	@include mobile {
+		grid-template-columns: 1fr;
+		width: 100%;
+	}
+}
+
+.main {
+	display: flex;
+	flex-direction: column;
+	padding: 40rem;
+
+	@include mobile {
+		padding: $space-24;
+	}
+}
+
+.heading {
+	padding-bottom: $space-32;
+
+	@include mobile {
+		display: none;
+	}
+}
+
+.headingTitle {
+	@include text-semibold-15;
+	color: $color-black;
+}
+
+.statusText {
+	@include text-body;
+	padding-bottom: 40rem;
+	color: $color-brown-light;
+}
+
+.tabs {
+	display: flex;
+	gap: $space-8;
+	padding-bottom: $space-32;
+
+	@include mobile {
+		justify-content: space-between;
+		padding-bottom: $space-16;
+	}
+}
+
+.tab {
+	@include reset-button;
+	@include flex-center;
+	@include text-semibold-15;
+	flex: 1;
+	min-width: 0;
+	padding: 13rem;
+	border: $border-width solid $color-black;
+	border-radius: $radius-8;
+	color: $color-brown-light;
+	transition:
+		color $transition-fast,
+		background-color $transition-fast;
+
+	@include hover {
+		color: $color-black;
+	}
+
+	@include mobile {
+		height: 48rem;
+		padding: $space-2 13rem;
+	}
+}
+
+.tabActive {
+	border-color: $color-brown-dark;
+	background: $color-brown-dark;
+	color: $color-white;
+
+	@include hover {
+		color: $color-white;
+	}
+}

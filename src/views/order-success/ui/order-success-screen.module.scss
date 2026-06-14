@@ -1,0 +1,23 @@
+@use 'shared/styles' as *;
+
+.actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: $space-12;
+}
+
+.whatsapp {
+	@include flex-center;
+	@include text-semibold-15;
+	height: 56rem;
+	padding-inline: 28rem;
+	border-radius: $radius-full;
+	background: $color-green;
+	color: $color-white;
+	transition: opacity $transition-fast;
+
+	@include hover {
+		opacity: 0.9;
+	}
+}

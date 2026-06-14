@@ -1,0 +1,87 @@
+@use 'shared/styles' as *;
+
+.gallery {
+	display: flex;
+	gap: $space-16;
+}
+
+.thumbs {
+	display: flex;
+	flex-direction: column;
+	flex-shrink: 0;
+	gap: $space-12;
+}
+
+.thumb {
+	@include reset-button;
+	@include panel-pattern;
+	position: relative;
+	width: 84rem;
+	height: 84rem;
+	overflow: hidden;
+	border: $border-width solid $color-border;
+	border-radius: $radius-10;
+	transition: border-color $transition-fast;
+
+	@include hover {
+		border-color: $color-black;
+	}
+}
+
+.thumbMedia {
+	object-fit: cover;
+}
+
+.thumbActive {
+	border-width: 2rem;
+	border-color: $color-black;
+}
+
+.mainWrap {
+	position: relative;
+	flex: 1;
+	min-width: 0;
+	aspect-ratio: 1;
+	overflow: hidden;
+	border-radius: $radius-12;
+}
+
+.viewport {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.track {
+	display: flex;
+	height: 100%;
+}
+
+.slide {
+	@include flex-center;
+	@include panel-pattern;
+	position: relative;
+	flex: 0 0 100%;
+	min-width: 0;
+	height: 100%;
+}
+
+.slideMedia {
+	object-fit: cover;
+}
+
+.badge {
+	position: absolute;
+	z-index: 1;
+	top: 17rem;
+	left: 17rem;
+}
+
+.slideLabel {
+	@include mono;
+	padding: $space-4 9rem;
+	border: $border-width solid $color-border;
+	border-radius: $radius-4;
+	background: $color-white;
+	color: $color-baige;
+}

@@ -1,0 +1,50 @@
+@use 'shared/styles' as *;
+
+.button {
+	@include flex-center;
+	gap: $space-8;
+	min-width: 48rem;
+	border-radius: $radius-10;
+	cursor: pointer;
+	transition:
+		background-color $transition-base,
+		color $transition-base,
+		opacity $transition-base;
+
+	svg {
+		width: 11rem;
+		height: 9rem;
+	}
+}
+
+.primary {
+	@include button-dark;
+	border: $border-width solid $color-white;
+
+	@include hover {
+		opacity: 0.92;
+	}
+}
+
+.outline {
+	border: $border-width solid $color-black;
+	background: transparent;
+	color: $color-black;
+
+	@include hover {
+		background: $color-black;
+		color: $color-white;
+	}
+}
+
+.lg {
+	@include button-text;
+	height: 56rem;
+	padding-inline: 24rem;
+}
+
+.md {
+	@include text-semibold-15;
+	height: 48rem;
+	padding-inline: $space-21;
+}

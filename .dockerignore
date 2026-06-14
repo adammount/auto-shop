@@ -1,0 +1,13 @@
+node_modules
+.next
+.git
+.env
+.env.*
+!.env.example
+*.log
+docs
+ref
+public/media
+README.md
+.vscode
+.idea

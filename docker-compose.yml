@@ -1,0 +1,63 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+        NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL}
+    environment:
+      DATABASE_URI: postgres://postgres:${POSTGRES_PASSWORD}@db:5432/auto_shop
+      PAYLOAD_SECRET: ${PAYLOAD_SECRET}
+      NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL}
+      RESEND_API_KEY: ${RESEND_API_KEY}
+      ORDER_EMAIL_TO: ${ORDER_EMAIL_TO}
+      ORDER_EMAIL_FROM: ${ORDER_EMAIL_FROM}
+      TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      ADMIN_NAME: ${ADMIN_NAME}
+    ports:
+      - '3000:3000'
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - auto-shop-media:/app/public/media
+    healthcheck:
+      test:
+        [
+          'CMD-SHELL',
+          'wget --no-verbose --tries=1 --spider http://127.0.0.1:3000/ || exit 1'
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    networks:
+      - auto-shop
+
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: auto_shop
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - auto-shop-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d auto_shop']
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - auto-shop
+
+networks:
+  auto-shop:
+
+volumes:
+  auto-shop-db:
+  auto-shop-media:

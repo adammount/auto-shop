@@ -1,0 +1,48 @@
+{
+	"name": "auto-shop",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "eslint .",
+		"typecheck": "tsc --noEmit",
+		"format": "prettier --write .",
+		"payload": "payload",
+		"generate:types": "payload generate:types",
+		"migrate": "payload migrate",
+		"seed": "payload run src/seed.ts"
+	},
+	"dependencies": {
+		"@hookform/resolvers": "^5.4.0",
+		"@payloadcms/db-postgres": "3.85.1",
+		"@payloadcms/email-resend": "3.85.1",
+		"@payloadcms/next": "3.85.1",
+		"@payloadcms/richtext-lexical": "3.85.1",
+		"clsx": "^2.1.1",
+		"embla-carousel-autoplay": "^8.6.0",
+		"embla-carousel-react": "^8.6.0",
+		"graphql": "16.14.2",
+		"next": "^16.2.9",
+		"payload": "3.85.1",
+		"react": "^19.2.7",
+		"react-dom": "^19.2.7",
+		"react-hook-form": "^7.78.0",
+		"sharp": "0.35.1",
+		"zod": "^4.4.3",
+		"zustand": "^5.0.14"
+	},
+	"devDependencies": {
+		"@trivago/prettier-plugin-sort-imports": "^6.0.2",
+		"@types/node": "^25.9.3",
+		"@types/react": "^19.2.17",
+		"@types/react-dom": "^19.2.3",
+		"eslint": "^9.18.0",
+		"eslint-config-next": "^16.2.9",
+		"prettier": "^3.8.4",
+		"sass": "^1.101.0",
+		"typescript": "^6.0.3"
+	}
+}

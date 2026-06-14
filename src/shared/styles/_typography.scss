@@ -1,0 +1,204 @@
+@use 'shared/styles/fonts' as *;
+
+@mixin logo {
+	font-family: $font-heading;
+	font-weight: 700;
+	font-size: 26rem;
+	line-height: 1;
+	letter-spacing: 1.56rem;
+	text-transform: uppercase;
+}
+
+@mixin hero-display {
+	font-family: $font-heading;
+	font-weight: 700;
+	font-size: 72rem;
+	line-height: 80rem;
+	letter-spacing: 0.36rem;
+	text-transform: uppercase;
+}
+
+@mixin hero-title {
+	font-family: $font-heading;
+	font-weight: 700;
+	font-size: 60rem;
+	line-height: 60rem;
+	letter-spacing: 0.31rem;
+	text-transform: uppercase;
+}
+
+@mixin display-title {
+	font-family: $font-heading;
+	font-weight: 700;
+	font-size: 40rem;
+	line-height: 62rem;
+	letter-spacing: 2.4rem;
+	text-transform: uppercase;
+}
+
+@mixin page-title {
+	font-family: $font-heading;
+	font-weight: 700;
+	font-size: 36rem;
+	line-height: 48rem;
+	letter-spacing: 0.18rem;
+	text-transform: uppercase;
+}
+
+@mixin page-title-lg {
+	font-family: $font-heading;
+	font-weight: 700;
+	font-size: 54rem;
+	line-height: 66rem;
+	letter-spacing: 0.27rem;
+	text-transform: uppercase;
+}
+
+@mixin section-head {
+	font-family: $font-heading;
+	font-weight: 600;
+	font-size: 34rem;
+	line-height: 1;
+	letter-spacing: 0.17rem;
+	text-transform: uppercase;
+}
+
+@mixin card-title {
+	font-family: $font-heading;
+	font-weight: 600;
+	font-size: 19rem;
+	line-height: 24rem;
+	letter-spacing: 0.76rem;
+	text-transform: uppercase;
+}
+
+@mixin text-lg {
+	font-family: $font-sans;
+	font-weight: 400;
+	font-size: 17rem;
+	line-height: 26rem;
+}
+
+@mixin text-body {
+	font-family: $font-sans;
+	font-weight: 400;
+	font-size: 13rem;
+	line-height: 20rem;
+}
+
+@mixin text-medium {
+	font-family: $font-sans;
+	font-weight: 500;
+	font-size: 15rem;
+	line-height: 22rem;
+}
+
+@mixin text-bold {
+	font-family: $font-sans;
+	font-weight: 700;
+	font-size: 15rem;
+	line-height: 22rem;
+}
+
+@mixin text-semibold {
+	font-family: $font-sans;
+	font-weight: 600;
+	font-size: 13rem;
+	line-height: 18rem;
+}
+
+@mixin text-semibold-15 {
+	font-family: $font-sans;
+	font-weight: 600;
+	font-size: 15rem;
+	line-height: 22rem;
+}
+
+@mixin button-text {
+	font-family: $font-sans;
+	font-weight: 600;
+	font-size: 17rem;
+	line-height: 1;
+}
+
+@mixin price {
+	font-family: $font-sans;
+	font-weight: 700;
+	font-size: 19rem;
+	line-height: 29rem;
+	letter-spacing: -0.19rem;
+}
+
+@mixin price-lg {
+	font-family: $font-sans;
+	font-weight: 700;
+	font-size: 28rem;
+	line-height: 42rem;
+	letter-spacing: -0.28rem;
+}
+
+@mixin tab-text {
+	font-family: $font-sans;
+	font-weight: 600;
+	font-size: 17rem;
+	line-height: 22rem;
+}
+
+@mixin label-upper {
+	font-family: $font-sans;
+	font-weight: 600;
+	font-size: 11rem;
+	line-height: 1.4;
+	letter-spacing: 1.54rem;
+	text-transform: uppercase;
+}
+
+@mixin label-upper-sm {
+	font-family: $font-sans;
+	font-weight: 600;
+	font-size: 12rem;
+	line-height: 18rem;
+	letter-spacing: 1.68rem;
+	text-transform: uppercase;
+}
+
+@mixin badge-text {
+	font-family: $font-sans;
+	font-weight: 600;
+	font-size: 12rem;
+	line-height: 12rem;
+	letter-spacing: 0.24rem;
+}
+
+@mixin badge-upper {
+	font-family: $font-sans;
+	font-weight: 600;
+	font-size: 12rem;
+	line-height: 12rem;
+	letter-spacing: 1.68rem;
+	text-transform: uppercase;
+}
+
+@mixin caption-upper {
+	font-family: $font-sans;
+	font-weight: 400;
+	font-size: 9rem;
+	line-height: 1.2;
+	letter-spacing: 1.4rem;
+	text-transform: uppercase;
+}
+
+@mixin caption {
+	font-family: $font-sans;
+	font-weight: 400;
+	font-size: 12rem;
+	line-height: 18rem;
+}
+
+@mixin mono {
+	font-family: $font-mono;
+	font-weight: 400;
+	font-size: 12rem;
+	line-height: 1.4;
+	letter-spacing: 0.24rem;
+}
