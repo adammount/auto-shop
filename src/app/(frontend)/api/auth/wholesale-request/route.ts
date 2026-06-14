@@ -22,6 +22,13 @@ export async function POST(request: Request) {
 		)
 	}
 
+	if (user.role === 'admin') {
+		return Response.json(
+			{ error: 'Администратору не нужна заявка на оптовый статус' },
+			{ status: 403 }
+		)
+	}
+
 	const payload = await getPayloadClient()
 
 	await payload.update({

@@ -25,6 +25,7 @@ export function ProfileSection({ user }: Props) {
 	const [isSaving, setIsSaving] = useState(false)
 
 	const isWholesale = user.role === 'wholesale' && user.wholesaleStatus === 'approved'
+	const showWholesaleCta = user.role === 'customer' && !isWholesale
 
 	const handleSave = async () => {
 		setIsSaving(true)
@@ -42,7 +43,7 @@ export function ProfileSection({ user }: Props) {
 
 	return (
 		<>
-			{!isWholesale && (
+			{showWholesaleCta && (
 				<div className={styles.status}>
 					<span className={styles.statusIcon}>
 						<Icon name='info' />

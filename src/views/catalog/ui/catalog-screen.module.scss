@@ -24,6 +24,10 @@
 .title {
 	@include page-title;
 	color: $color-black;
+
+	@include mobile {
+		line-height: 38rem;
+	}
 }
 
 .count {

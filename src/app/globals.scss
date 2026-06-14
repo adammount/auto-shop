@@ -9,6 +9,7 @@
 html {
 	font-size: calc(100 / 1440 * 1vw);
 	scroll-behavior: smooth;
+	scroll-padding-top: 80rem;
 }
 
 @include mobile {
@@ -56,4 +57,39 @@ ul,
 ol {
 	list-style: none;
 	padding: 0;
+}
+
+:focus-visible {
+	outline: 2px solid $color-orange;
+	outline-offset: 2px;
+	border-radius: 2rem;
+}
+
+.skip-link {
+	position: fixed;
+	top: $space-8;
+	left: $space-8;
+	z-index: 9999;
+	padding: $space-12 $space-16;
+	border: $border-width solid $color-black;
+	border-radius: $radius-8;
+	background: $color-white;
+	color: $color-black;
+	@include text-semibold;
+	transform: translateY(-200%);
+	transition: transform $transition-fast;
+
+	&:focus {
+		transform: translateY(0);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
 }

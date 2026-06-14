@@ -45,6 +45,7 @@ export function AccountScreen() {
 	if (!user) return null
 
 	const isWholesale = user.role === 'wholesale' && user.wholesaleStatus === 'approved'
+	const isAdmin = user.role === 'admin'
 
 	return (
 		<div className={styles.screen}>
@@ -76,7 +77,12 @@ export function AccountScreen() {
 						/>
 					)}
 					{active === 'favorites' && <FavoritesSection />}
-					{active === 'wholesale' && <WholesaleSection isWholesale={isWholesale} />}
+					{active === 'wholesale' && (
+						<WholesaleSection
+							isWholesale={isWholesale}
+							isAdmin={isAdmin}
+						/>
+					)}
 				</div>
 			</div>
 		</div>

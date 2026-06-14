@@ -11,9 +11,22 @@ const POINTS = [
 
 interface Props {
 	isWholesale: boolean
+	isAdmin?: boolean
 }
 
-export function WholesaleSection({ isWholesale }: Props) {
+export function WholesaleSection({ isWholesale, isAdmin = false }: Props) {
+	if (isAdmin) {
+		return (
+			<section className={styles.card}>
+				<h2 className={styles.cardTitle}>Статус оптовика</h2>
+				<p className={styles.statusNote}>
+					Вы вошли как администратор. Оптовый статус для этого аккаунта не требуется — оптовые цены
+					настраиваются в админке.
+				</p>
+			</section>
+		)
+	}
+
 	return (
 		<section className={styles.card}>
 			<h2 className={styles.cardTitle}>Статус оптовика</h2>
