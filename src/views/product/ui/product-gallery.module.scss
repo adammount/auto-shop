@@ -3,6 +3,11 @@
 .gallery {
 	display: flex;
 	gap: $space-16;
+
+	@include mobile {
+		flex-direction: column;
+		gap: $space-8;
+	}
 }
 
 .thumbs {
@@ -13,6 +18,16 @@
 	align-self: stretch;
 	min-height: 0;
 	overflow-y: auto;
+
+	@include mobile {
+		order: 2;
+		flex-direction: row;
+		align-self: stretch;
+		min-height: 0;
+		overflow-x: auto;
+		overflow-y: visible;
+		gap: $space-8;
+	}
 }
 
 .thumb {
@@ -29,6 +44,11 @@
 
 	@include hover {
 		border-color: $color-black;
+	}
+
+	@include mobile {
+		width: 62rem;
+		height: 62rem;
 	}
 }
 
@@ -48,6 +68,12 @@
 	aspect-ratio: 1;
 	overflow: hidden;
 	border-radius: $radius-12;
+
+	@include mobile {
+		order: 1;
+		width: 100%;
+		flex: none;
+	}
 }
 
 .viewport {
