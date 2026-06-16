@@ -17,6 +17,8 @@ import { Banners } from '@/globals/banners'
 import { Reviews } from '@/globals/reviews'
 import { SiteSettings } from '@/globals/site-settings'
 
+import { migrations } from './migrations'
+
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const serverURL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
@@ -42,7 +44,8 @@ export default buildConfig({
 	db: postgresAdapter({
 		pool: {
 			connectionString: process.env.DATABASE_URI || ''
-		}
+		},
+		prodMigrations: migrations
 	}),
 	email: process.env.RESEND_API_KEY
 		? resendAdapter({

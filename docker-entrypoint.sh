@@ -1,10 +1,5 @@
 #!/bin/sh
 set -e
 
-echo "Running Payload migrations..."
-cd /app/migrate
-bun payload migrate
-
-echo "Starting server..."
-cd /app
+echo "Starting server (migrations run on init via prodMigrations)..."
 exec bun server.js
