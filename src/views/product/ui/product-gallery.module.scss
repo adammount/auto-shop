@@ -3,10 +3,12 @@
 .gallery {
 	display: flex;
 	gap: $space-16;
+	min-width: 0;
 
 	@include mobile {
 		flex-direction: column;
 		gap: $space-8;
+		width: 100%;
 	}
 }
 
@@ -23,6 +25,8 @@
 		order: 2;
 		flex-direction: row;
 		align-self: stretch;
+		width: 100%;
+		min-width: 0;
 		min-height: 0;
 		overflow-x: auto;
 		overflow-y: visible;
@@ -72,6 +76,7 @@
 	@include mobile {
 		order: 1;
 		width: 100%;
+		max-width: 100%;
 		flex: none;
 		aspect-ratio: auto;
 		height: 354rem;

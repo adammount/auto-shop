@@ -16,7 +16,7 @@
 	padding-block: $space-24 $space-48;
 
 	@include mobile {
-		grid-template-columns: 1fr;
+		grid-template-columns: minmax(0, 1fr);
 		row-gap: $space-24;
 	}
 }

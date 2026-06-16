@@ -20,7 +20,7 @@
 	gap: $space-8;
 
 	@include mobile {
-		flex-wrap: nowrap;
+		flex-wrap: wrap;
 		justify-content: space-between;
 		width: 100%;
 	}
@@ -43,6 +43,10 @@
 	line-height: 38rem;
 	letter-spacing: 0.17rem;
 	color: $color-black;
+
+	@include mobile {
+		overflow-wrap: anywhere;
+	}
 }
 
 .art {
