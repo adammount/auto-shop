@@ -39,7 +39,7 @@ export async function ReviewsSection() {
 								className={styles.stars}
 								aria-label={`Оценка ${review.rating} из 5`}
 							>
-								{Array.from({ length: review.rating }).map((_, index) => (
+								{Array.from({ length: Math.min(5, Math.round(review.rating)) }).map((_, index) => (
 									<span
 										key={index}
 										className={styles.star}

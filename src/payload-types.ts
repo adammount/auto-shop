@@ -265,6 +265,7 @@ export interface Product {
   stock?: number | null;
   isActive?: boolean | null;
   isNew?: boolean | null;
+  isPopular?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -520,6 +521,7 @@ export interface ProductsSelect<T extends boolean = true> {
   stock?: T;
   isActive?: T;
   isNew?: T;
+  isPopular?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -37,7 +37,8 @@ const PRODUCTS = [
 		priceRetail: 4280,
 		priceWholesale: 3620,
 		stock: 24,
-		isNew: true
+		isNew: true,
+		isPopular: true
 	},
 	{
 		title: 'Колодки тормозные, комплект',
@@ -67,7 +68,8 @@ const PRODUCTS = [
 		category: 'filtry',
 		priceRetail: 540,
 		priceWholesale: 430,
-		stock: 120
+		stock: 120,
+		isPopular: true
 	},
 	{
 		title: 'Воздушный фильтр салона',
@@ -88,7 +90,8 @@ const PRODUCTS = [
 		priceRetail: 6750,
 		priceWholesale: 5800,
 		stock: 16,
-		isNew: true
+		isNew: true,
+		isPopular: true
 	},
 	{
 		title: 'Опора шаровая',
@@ -108,7 +111,8 @@ const PRODUCTS = [
 		category: 'dvigatel',
 		priceRetail: 920,
 		priceWholesale: 740,
-		stock: 200
+		stock: 200,
+		isPopular: true
 	},
 	{
 		title: 'Масло моторное 5W-30, 4 л',
@@ -323,7 +327,8 @@ const seed = async () => {
 				priceWholesale: product.priceWholesale,
 				stock: product.stock,
 				isActive: true,
-				isNew: product.isNew ?? false,
+				isNew: 'isNew' in product ? product.isNew : false,
+				isPopular: 'isPopular' in product ? product.isPopular : false,
 				category: categoryMap.get(product.category),
 				brand: brandMap.get(product.brand),
 				imageUrls

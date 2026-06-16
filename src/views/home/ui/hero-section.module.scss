@@ -75,6 +75,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: $space-12;
+	margin-top: auto;
 	padding-top: $space-12;
 
 	@include mobile {

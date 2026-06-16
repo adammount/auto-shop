@@ -10,12 +10,16 @@
 	flex-direction: column;
 	flex-shrink: 0;
 	gap: $space-12;
+	align-self: stretch;
+	min-height: 0;
+	overflow-y: auto;
 }
 
 .thumb {
 	@include reset-button;
 	@include panel-pattern;
 	position: relative;
+	flex-shrink: 0;
 	width: 84rem;
 	height: 84rem;
 	overflow: hidden;

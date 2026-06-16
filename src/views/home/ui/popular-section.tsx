@@ -1,14 +1,16 @@
-import { getProducts } from '@/shared/api/products-repository'
+import { getPopularProducts } from '@/shared/api/products-repository'
 import { ROUTES } from '@/shared/config'
 import { ProductRail } from '@/shared/ui/product-rail'
 
 export async function PopularSection() {
-	const products = await getProducts()
+	const products = await getPopularProducts()
+
+	if (products.length === 0) return null
 
 	return (
 		<ProductRail
 			title='Популярные товары'
-			products={products.slice(0, 4)}
+			products={products}
 			actionLabel='Весь каталог'
 			actionHref={ROUTES.catalog}
 		/>

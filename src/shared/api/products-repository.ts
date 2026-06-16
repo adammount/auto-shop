@@ -58,22 +58,24 @@ function buildCatalogWhere(query: CatalogQuery): Where {
 	return { and }
 }
 
-export const getProducts = unstable_cache(
+export const getPopularProducts = unstable_cache(
 	async (): Promise<Product[]> =>
 		safeQuery(async () => {
 			const payload = await getPayloadClient()
 
 			const result = await payload.find({
 				collection: 'products',
-				where: { isActive: { equals: true } },
+				where: {
+					and: [{ isActive: { equals: true } }, { isPopular: { equals: true } }]
+				},
 				depth: 1,
-				limit: 50,
+				limit: 4,
 				sort: '-createdAt'
 			})
 
 			return result.docs.map(toProduct)
 		}, []),
-	['products-list'],
+	['popular-products'],
 	{ tags: [CACHE_TAGS.products], revalidate: CACHE_REVALIDATE }
 )
 
@@ -175,21 +177,42 @@ export async function getProductDetailBySlug(slug: string): Promise<ProductDetai
 	}, null)
 }
 
-export async function getRelatedProducts(excludeSlug: string): Promise<Product[]> {
+const RELATED_LIMIT = 4
+
+export async function getRelatedProducts(
+	excludeSlug: string,
+	categorySlug?: string
+): Promise<Product[]> {
 	return safeQuery(async () => {
 		const payload = await getPayloadClient()
 
-		const result = await payload.find({
-			collection: 'products',
-			where: {
-				and: [{ isActive: { equals: true } }, { slug: { not_equals: excludeSlug } }]
-			},
-			depth: 1,
-			limit: 4,
-			sort: '-createdAt'
-		})
+		const findProducts = (where: Where, limit: number) =>
+			payload.find({ collection: 'products', where, depth: 1, limit, sort: '-createdAt' })
 
-		return result.docs.map(toProduct)
+		const sameCategory = categorySlug
+			? await findProducts(
+					{
+						and: [
+							{ isActive: { equals: true } },
+							{ slug: { not_equals: excludeSlug } },
+							{ 'category.slug': { equals: categorySlug } }
+						]
+					},
+					RELATED_LIMIT
+				)
+			: { docs: [] }
+
+		const products = sameCategory.docs.map(toProduct)
+
+		if (products.length >= RELATED_LIMIT) return products
+
+		const excludeSlugs = [excludeSlug, ...products.map(item => item.slug)]
+		const fallback = await findProducts(
+			{ and: [{ isActive: { equals: true } }, { slug: { not_in: excludeSlugs } }] },
+			RELATED_LIMIT - products.length
+		)
+
+		return [...products, ...fallback.docs.map(toProduct)]
 	}, [])
 }
 

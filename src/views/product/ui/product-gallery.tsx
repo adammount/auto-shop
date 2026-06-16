@@ -20,7 +20,7 @@ export function ProductGallery({ images, labels, title, isNew }: Props) {
 	const { emblaRef, selectedIndex, scrollTo } = useGalleryCarousel()
 
 	const hasImages = images.length > 0
-	const slides = hasImages ? images : labels
+	const slides = (hasImages ? images : labels).slice(0, 5)
 
 	return (
 		<div className={styles.gallery}>

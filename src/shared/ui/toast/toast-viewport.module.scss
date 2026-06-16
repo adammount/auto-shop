@@ -18,4 +18,9 @@
 	transition:
 		transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
 		opacity 0.28s ease;
+
+	@include mobile {
+		width: calc(100vw - #{$space-24});
+		max-width: calc(100vw - #{$space-24});
+	}
 }

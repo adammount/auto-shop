@@ -24,6 +24,11 @@
 	transition:
 		opacity 0.28s ease,
 		transform 0.28s ease;
+
+	@include mobile {
+		display: flex;
+		width: 100%;
+	}
 }
 
 .leaving {

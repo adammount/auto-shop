@@ -57,7 +57,7 @@ export default async function ProductPage({ params }: Props) {
 
 	if (!product) notFound()
 
-	const related = await getRelatedProducts(slug)
+	const related = await getRelatedProducts(slug, product.categorySlug)
 	const url = `${siteUrl}${ROUTES.product(slug)}`
 
 	const availability =

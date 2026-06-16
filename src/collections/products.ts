@@ -98,6 +98,11 @@ export const Products: CollectionConfig = {
 			name: 'isNew',
 			type: 'checkbox',
 			defaultValue: false
+		},
+		{
+			name: 'isPopular',
+			type: 'checkbox',
+			defaultValue: false
 		}
 	]
 }
