@@ -1,6 +1,8 @@
 @use 'shared/styles' as *;
 
 .header {
+	position: relative;
+	z-index: $z-header;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
