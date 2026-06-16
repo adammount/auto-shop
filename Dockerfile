@@ -23,7 +23,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup --system --gid 1001 nodejs \
 	&& adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
@@ -32,7 +32,9 @@ COPY --from=builder --chown=nextjs:nodejs /app/src ./seed/src
 COPY --from=builder --chown=nextjs:nodejs /app/tsconfig.json ./seed/tsconfig.json
 
 COPY --chown=nextjs:nodejs docker-entrypoint.sh ./
-RUN chmod +x docker-entrypoint.sh
+RUN chmod +x docker-entrypoint.sh \
+	&& mkdir -p public/media \
+	&& chown -R nextjs:nodejs public/media
 
 USER nextjs
 EXPOSE 3000

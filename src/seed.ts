@@ -249,7 +249,6 @@ const seed = async () => {
 
 	const categoryMap = new Map<string, number>()
 	for (const category of CATEGORIES) {
-		const imageUrl = `https://picsum.photos/seed/${category.slug}/400/300`
 		const existing = await payload.find({
 			collection: 'categories',
 			where: { slug: { equals: category.slug } },
@@ -257,21 +256,12 @@ const seed = async () => {
 		})
 
 		if (existing.docs[0]) {
-			const doc = existing.docs[0]
-			if (!doc.imageUrl && !doc.image) {
-				await payload.update({
-					collection: 'categories',
-					id: doc.id,
-					context: { disableRevalidate: true },
-					data: { imageUrl }
-				})
-			}
-			categoryMap.set(category.slug, doc.id)
+			categoryMap.set(category.slug, existing.docs[0].id)
 		} else {
 			const doc = await payload.create({
 				collection: 'categories',
 				context: { disableRevalidate: true },
-				data: { ...category, imageUrl }
+				data: category
 			})
 			categoryMap.set(category.slug, doc.id)
 		}
@@ -291,30 +281,13 @@ const seed = async () => {
 	}
 
 	for (const product of PRODUCTS) {
-		const imageUrls = [1, 2, 3].map(index => ({
-			url: `https://picsum.photos/seed/${product.slug}-${index}/800/800`
-		}))
-
 		const existing = await payload.find({
 			collection: 'products',
 			where: { slug: { equals: product.slug } },
 			limit: 1
 		})
 
-		if (existing.docs[0]) {
-			const doc = existing.docs[0]
-			const hasImages =
-				(doc.images && doc.images.length > 0) || (doc.imageUrls && doc.imageUrls.length > 0)
-			if (!hasImages) {
-				await payload.update({
-					collection: 'products',
-					id: doc.id,
-					context: { disableRevalidate: true },
-					data: { imageUrls }
-				})
-			}
-			continue
-		}
+		if (existing.docs[0]) continue
 
 		await payload.create({
 			collection: 'products',
@@ -330,8 +303,7 @@ const seed = async () => {
 				isNew: 'isNew' in product ? product.isNew : false,
 				isPopular: 'isPopular' in product ? product.isPopular : false,
 				category: categoryMap.get(product.category),
-				brand: brandMap.get(product.brand),
-				imageUrls
+				brand: brandMap.get(product.brand)
 			}
 		})
 	}
@@ -395,7 +367,6 @@ const seed = async () => {
 					primaryHref: '/catalog',
 					secondaryLabel: 'О компании',
 					secondaryHref: '/about',
-					imageUrl: 'https://picsum.photos/seed/banner-warehouse/900/600',
 					mediaLabel: 'фото: витрина / стеллажи со склада'
 				},
 				{
@@ -406,7 +377,6 @@ const seed = async () => {
 					primaryHref: '/delivery',
 					secondaryLabel: 'Контакты',
 					secondaryHref: '/contacts',
-					imageUrl: 'https://picsum.photos/seed/banner-shipping/900/600',
 					mediaLabel: 'фото: упаковка и отгрузка заказа'
 				},
 				{
@@ -417,7 +387,6 @@ const seed = async () => {
 					primaryHref: '/wholesale-request',
 					secondaryLabel: 'Войти',
 					secondaryHref: '/login',
-					imageUrl: 'https://picsum.photos/seed/banner-wholesale/900/600',
 					mediaLabel: 'фото: оптовый склад'
 				}
 			]
