@@ -143,6 +143,7 @@
 }
 
 .map {
+	@include panel-pattern;
 	display: block;
 	width: 237rem;
 	height: 158rem;
@@ -153,10 +154,16 @@
 
 	@include mobile {
 		width: 100%;
-		height: auto;
-		aspect-ratio: 105 / 70;
+		height: 158rem;
 		margin-top: 0;
 	}
+}
+
+.mapFrame {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border: none;
 }
 
 .bottom {

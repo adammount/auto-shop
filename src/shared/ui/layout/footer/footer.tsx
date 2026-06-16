@@ -7,6 +7,8 @@ import cn from 'clsx'
 import { telHref, waLink } from '@/shared/lib/contacts'
 import { Icon } from '@/shared/ui/icon'
 
+import { FooterMap } from './footer-map'
+
 import styles from './footer.module.scss'
 
 const CUSTOMER_LINKS = [
@@ -102,16 +104,7 @@ export async function Footer() {
 								</>
 							)}
 						</address>
-						{settings.address && (
-							<iframe
-								src={`https://yandex.ru/map-widget/v1/?mode=search&text=${encodeURIComponent(
-									settings.address
-								)}&z=16`}
-								title={`Карта: ${settings.address}`}
-								loading='lazy'
-								className={styles.map}
-							/>
-						)}
+						{settings.address && <FooterMap address={settings.address} />}
 					</div>
 				</div>
 			</div>
