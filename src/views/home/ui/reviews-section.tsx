@@ -37,6 +37,7 @@ export async function ReviewsSection() {
 						<div className={styles.top}>
 							<div
 								className={styles.stars}
+								role='img'
 								aria-label={`Оценка ${review.rating} из 5`}
 							>
 								{Array.from({ length: Math.min(5, Math.round(review.rating)) }).map((_, index) => (

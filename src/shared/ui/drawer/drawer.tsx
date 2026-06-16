@@ -21,7 +21,7 @@ const FOCUSABLE =
 	'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
 
 export function Drawer({ isOpen, title, count, side = 'right', onClose, children }: Props) {
-	const panelRef = useRef<HTMLElement>(null)
+	const panelRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
 		if (!isOpen) return
@@ -75,7 +75,7 @@ export function Drawer({ isOpen, title, count, side = 'right', onClose, children
 				className={styles.overlay}
 				onClick={onClose}
 			/>
-			<aside
+			<div
 				ref={panelRef}
 				className={cn(styles.panel, { [styles.panelLeft]: side === 'left' })}
 				role='dialog'
@@ -99,7 +99,7 @@ export function Drawer({ isOpen, title, count, side = 'right', onClose, children
 					</button>
 				</div>
 				<div className={styles.body}>{children}</div>
-			</aside>
+			</div>
 		</div>
 	)
 }

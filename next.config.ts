@@ -7,9 +7,26 @@ const parsedServerUrl = serverUrl ? new URL(serverUrl) : null
 const serverHostname = parsedServerUrl?.hostname
 const serverProtocol = parsedServerUrl?.protocol.replace(':', '') === 'http' ? 'http' : 'https'
 
+const securityHeaders = [
+	{
+		key: 'Strict-Transport-Security',
+		value: 'max-age=63072000; includeSubDomains; preload'
+	},
+	{ key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+	{ key: 'X-Content-Type-Options', value: 'nosniff' },
+	{ key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+	{
+		key: 'Cross-Origin-Opener-Policy',
+		value: 'same-origin-allow-popups'
+	}
+]
+
 const nextConfig: NextConfig = {
 	output: 'standalone',
 	reactStrictMode: true,
+	async headers() {
+		return [{ source: '/:path*', headers: securityHeaders }]
+	},
 	sassOptions: {
 		loadPaths: [path.join(process.cwd(), 'src')]
 	},
