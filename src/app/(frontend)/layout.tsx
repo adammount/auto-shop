@@ -83,6 +83,29 @@ export default async function FrontendLayout({ children }: Props) {
 
 	return (
 		<html lang='ru'>
+			<head>
+				<link
+					rel='preload'
+					href='/fonts/golos-text-regular.woff2'
+					as='font'
+					type='font/woff2'
+					crossOrigin='anonymous'
+				/>
+				<link
+					rel='preload'
+					href='/fonts/golos-text-medium.woff2'
+					as='font'
+					type='font/woff2'
+					crossOrigin='anonymous'
+				/>
+				<link
+					rel='preload'
+					href='/fonts/oswald-bold.woff2'
+					as='font'
+					type='font/woff2'
+					crossOrigin='anonymous'
+				/>
+			</head>
 			<body>
 				<JsonLd data={organizationLd} />
 				<SessionInit />
