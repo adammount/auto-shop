@@ -117,8 +117,6 @@
 }
 
 .map {
-	@include flex-center;
-	@include panel-pattern;
 	aspect-ratio: 580 / 436;
 	border: $border-width solid $color-black;
 	border-radius: $radius-22;
@@ -126,13 +124,4 @@
 	@include mobile {
 		aspect-ratio: 340 / 255;
 	}
-}
-
-.mapLabel {
-	@include mono;
-	padding: $space-4 9rem;
-	border: $border-width solid $color-border;
-	border-radius: $radius-4;
-	background: $color-white;
-	color: $color-baige;
 }

@@ -3,6 +3,7 @@ import { ROUTES } from '@/shared/config'
 import { telHref, waLink } from '@/shared/lib/contacts'
 import { Breadcrumbs } from '@/shared/ui/breadcrumbs'
 import { LinkButton } from '@/shared/ui/button'
+import { LazyMap } from '@/shared/ui/lazy-map'
 
 import styles from './contacts-screen.module.scss'
 
@@ -66,9 +67,12 @@ export async function ContactsScreen() {
 					</div>
 				</div>
 
-				<div className={styles.map}>
-					<span className={styles.mapLabel}>карта · схема проезда</span>
-				</div>
+					{settings.address && (
+						<LazyMap
+							address={settings.address}
+							className={styles.map}
+						/>
+					)}
 			</div>
 		</div>
 	)

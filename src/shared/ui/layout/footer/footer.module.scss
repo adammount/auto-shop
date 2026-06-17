@@ -143,27 +143,17 @@
 }
 
 .map {
-	@include panel-pattern;
-	display: block;
 	width: 237rem;
 	height: 158rem;
 	margin-top: $space-12;
 	border: $border-width solid $color-black;
 	border-radius: $radius-10;
-	overflow: hidden;
 
 	@include mobile {
 		width: 100%;
 		height: 158rem;
 		margin-top: 0;
 	}
-}
-
-.mapFrame {
-	display: block;
-	width: 100%;
-	height: 100%;
-	border: none;
 }
 
 .bottom {

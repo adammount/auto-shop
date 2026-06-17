@@ -6,8 +6,7 @@ import cn from 'clsx'
 
 import { telHref, waLink } from '@/shared/lib/contacts'
 import { Icon } from '@/shared/ui/icon'
-
-import { FooterMap } from './footer-map'
+import { LazyMap } from '@/shared/ui/lazy-map'
 
 import styles from './footer.module.scss'
 
@@ -104,7 +103,12 @@ export async function Footer() {
 								</>
 							)}
 						</address>
-						{settings.address && <FooterMap address={settings.address} />}
+						{settings.address && (
+								<LazyMap
+									address={settings.address}
+									className={styles.map}
+								/>
+							)}
 					</div>
 				</div>
 			</div>

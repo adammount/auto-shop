@@ -2,13 +2,16 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-import styles from './footer.module.scss'
+import cn from 'clsx'
+
+import styles from './lazy-map.module.scss'
 
 interface Props {
 	address: string
+	className?: string
 }
 
-export function FooterMap({ address }: Props) {
+export function LazyMap({ address, className }: Props) {
 	const ref = useRef<HTMLDivElement>(null)
 	const [isVisible, setIsVisible] = useState(false)
 
@@ -37,14 +40,14 @@ export function FooterMap({ address }: Props) {
 	return (
 		<div
 			ref={ref}
-			className={styles.map}
+			className={cn(styles.map, className)}
 		>
 			{isVisible && (
 				<iframe
 					src={src}
 					title={`Карта: ${address}`}
 					loading='lazy'
-					className={styles.mapFrame}
+					className={styles.frame}
 				/>
 			)}
 		</div>
