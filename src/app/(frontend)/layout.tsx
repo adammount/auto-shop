@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import localFont from 'next/font/local'
 import type { ReactNode } from 'react'
 
 import { getSiteSettings } from '@/shared/api/content-repository'
@@ -10,6 +11,39 @@ import { SessionInit } from '@/shared/ui/session-init'
 import { ToastViewport } from '@/shared/ui/toast'
 
 import '../globals.scss'
+
+const golos = localFont({
+	src: [
+		{ path: '../../../public/fonts/golos-text-regular.woff2', weight: '400', style: 'normal' },
+		{ path: '../../../public/fonts/golos-text-medium.woff2', weight: '500', style: 'normal' },
+		{ path: '../../../public/fonts/golos-text-semi-bold.woff2', weight: '600', style: 'normal' },
+		{ path: '../../../public/fonts/golos-text-bold.woff2', weight: '700', style: 'normal' }
+	],
+	variable: '--font-sans',
+	display: 'swap',
+	fallback: ['Arial', 'sans-serif']
+})
+
+const oswald = localFont({
+	src: [
+		{ path: '../../../public/fonts/oswald-regular.woff2', weight: '400', style: 'normal' },
+		{ path: '../../../public/fonts/oswald-semi-bold.woff2', weight: '600', style: 'normal' },
+		{ path: '../../../public/fonts/oswald-bold.woff2', weight: '700', style: 'normal' }
+	],
+	variable: '--font-heading',
+	display: 'swap',
+	fallback: ['Arial', 'sans-serif']
+})
+
+const jetBrainsMono = localFont({
+	src: [
+		{ path: '../../../public/fonts/jet-brainsmono-regular.woff2', weight: '400', style: 'normal' },
+		{ path: '../../../public/fonts/jet-brainsmono-bold.woff2', weight: '700', style: 'normal' }
+	],
+	variable: '--font-mono',
+	display: 'swap',
+	fallback: ['monospace']
+})
 
 const siteUrl = process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:3000'
 const siteName = 'Деталь'
@@ -82,30 +116,10 @@ export default async function FrontendLayout({ children }: Props) {
 	}
 
 	return (
-		<html lang='ru'>
-			<head>
-				<link
-					rel='preload'
-					href='/fonts/golos-text-regular.woff2'
-					as='font'
-					type='font/woff2'
-					crossOrigin='anonymous'
-				/>
-				<link
-					rel='preload'
-					href='/fonts/golos-text-medium.woff2'
-					as='font'
-					type='font/woff2'
-					crossOrigin='anonymous'
-				/>
-				<link
-					rel='preload'
-					href='/fonts/oswald-bold.woff2'
-					as='font'
-					type='font/woff2'
-					crossOrigin='anonymous'
-				/>
-			</head>
+		<html
+			lang='ru'
+			className={`${golos.variable} ${oswald.variable} ${jetBrainsMono.variable}`}
+		>
 			<body>
 				<JsonLd data={organizationLd} />
 				<SessionInit />
