@@ -34,6 +34,16 @@ body {
 	@include text-body;
 }
 
+@media (pointer: coarse) {
+	body {
+		min-height: 0;
+	}
+
+	#main-content {
+		min-height: 100svh;
+	}
+}
+
 img,
 video,
 svg {
