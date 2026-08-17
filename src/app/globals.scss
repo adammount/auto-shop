@@ -18,7 +18,7 @@ html {
 	}
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce), (pointer: coarse) {
 	html {
 		scroll-behavior: auto;
 	}
@@ -30,7 +30,7 @@ body {
 	text-rendering: optimizeLegibility;
 	background: $color-bg;
 	color: $color-fg;
-	min-height: 100dvh;
+	min-height: 100svh;
 	@include text-body;
 }
 
