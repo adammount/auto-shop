@@ -46,6 +46,7 @@ button,
 textarea,
 select {
 	font: inherit;
+	appearance: none;
 }
 
 @media (pointer: coarse) {
