@@ -51,8 +51,11 @@ select {
 
 @media (pointer: coarse) {
 	input,
+	input[class],
 	textarea,
-	select {
+	textarea[class],
+	select,
+	select[class] {
 		font-size: 16px;
 	}
 }

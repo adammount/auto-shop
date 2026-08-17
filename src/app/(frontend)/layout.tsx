@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import localFont from 'next/font/local'
 import type { ReactNode } from 'react'
 
@@ -88,6 +88,12 @@ export const metadata: Metadata = {
 		follow: true,
 		googleBot: { index: true, follow: true, 'max-image-preview': 'large' }
 	}
+}
+
+export const viewport: Viewport = {
+	width: 'device-width',
+	initialScale: 1,
+	interactiveWidget: 'resizes-visual'
 }
 
 interface Props {
