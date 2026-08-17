@@ -1,15 +1,15 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { ROUTES } from '@/shared/config'
 import { ProductScreen } from '@/views/product'
-import { JsonLd } from '@/shared/ui/json-ld'
 
 import {
 	getAllProductSlugs,
 	getProductDetailBySlug,
 	getRelatedProducts
 } from '@/shared/api/products-repository'
+import { ROUTES } from '@/shared/config'
+import { JsonLd } from '@/shared/ui/json-ld'
 
 const siteUrl = process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:3000'
 
@@ -30,7 +30,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 	if (!product) return { title: 'Товар не найден' }
 
-	const description = product.description[0] ?? `${product.title} — ${product.brand}. ${product.sku}`
+	const description =
+		product.description[0] ?? `${product.title} — ${product.brand}. ${product.sku}`
 	const url = `${siteUrl}${ROUTES.product(slug)}`
 
 	return {
@@ -63,9 +64,7 @@ export default async function ProductPage({ params }: Props) {
 	const url = `${siteUrl}${ROUTES.product(slug)}`
 
 	const availability =
-		product.stock === 'out'
-			? 'https://schema.org/OutOfStock'
-			: 'https://schema.org/InStock'
+		product.stock === 'out' ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock'
 
 	const productLd = {
 		'@context': 'https://schema.org',

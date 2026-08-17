@@ -1,13 +1,25 @@
+import { NextResponse } from 'next/server'
+
 import { wholesaleSchema } from '@/shared/api/auth-schema'
 import { getCurrentUser } from '@/shared/lib/auth'
 import { getPayloadClient } from '@/shared/lib/payload'
+import { clientKey, rateLimit } from '@/shared/lib/rate-limit'
 
 export async function POST(request: Request) {
+	const allowed = rateLimit(clientKey(request, 'wholesale'), {
+		limit: 5,
+		windowMs: 15 * 60 * 1000
+	})
+
+	if (!allowed) {
+		return NextResponse.json({ error: 'Слишком много попыток, попробуйте позже' }, { status: 429 })
+	}
+
 	const body = await request.json().catch(() => null)
 	const parsed = wholesaleSchema.safeParse(body)
 
 	if (!parsed.success) {
-		return Response.json(
+		return NextResponse.json(
 			{ error: 'Проверьте поля формы', issues: parsed.error.issues },
 			{ status: 400 }
 		)
@@ -16,14 +28,14 @@ export async function POST(request: Request) {
 	const user = await getCurrentUser()
 
 	if (!user) {
-		return Response.json(
+		return NextResponse.json(
 			{ error: 'Войдите или зарегистрируйтесь, чтобы оставить заявку' },
 			{ status: 401 }
 		)
 	}
 
 	if (user.role === 'admin') {
-		return Response.json(
+		return NextResponse.json(
 			{ error: 'Администратору не нужна заявка на оптовый статус' },
 			{ status: 403 }
 		)
@@ -42,5 +54,5 @@ export async function POST(request: Request) {
 		overrideAccess: true
 	})
 
-	return Response.json({ ok: true })
+	return NextResponse.json({ ok: true })
 }

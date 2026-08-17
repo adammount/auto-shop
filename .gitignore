@@ -52,3 +52,5 @@ uploads/
 # Payload
 /public/media
 /src/payload-generated-schema.ts
+.claude
+.vscode

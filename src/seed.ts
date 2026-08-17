@@ -225,8 +225,12 @@ const seed = async () => {
 	payload.logger.info('Seeding database…')
 
 	const adminEmail = process.env.ADMIN_EMAIL || 'admin@detal.ru'
-	const adminPassword = process.env.ADMIN_PASSWORD || 'admin12345'
+	const adminPassword = process.env.ADMIN_PASSWORD
 	const adminName = process.env.ADMIN_NAME || 'Администратор'
+
+	if (!adminPassword) {
+		throw new Error('ADMIN_PASSWORD не задан — задайте переменную окружения перед запуском сида')
+	}
 
 	const existingAdmin = await payload.find({
 		collection: 'users',

@@ -58,9 +58,7 @@ export function CartDrawerContent() {
 									size='sm'
 									onChange={value => setQuantity(product.id, value)}
 								/>
-								<span className={styles.price}>
-									{formatPrice(product.priceRetail * quantity)}
-								</span>
+								<span className={styles.price}>{formatPrice(product.priceRetail * quantity)}</span>
 							</div>
 						</div>
 						<button

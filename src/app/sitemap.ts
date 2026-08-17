@@ -1,8 +1,8 @@
 import type { MetadataRoute } from 'next'
 
 import { getNavCategories } from '@/shared/api/content-repository'
-import { ROUTES } from '@/shared/config'
 import { getAllProductSlugs } from '@/shared/api/products-repository'
+import { ROUTES } from '@/shared/config'
 
 const siteUrl = process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:3000'
 
@@ -13,8 +13,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
 	const staticRoutes: MetadataRoute.Sitemap = [
 		{ url: `${siteUrl}/`, lastModified: now, changeFrequency: 'daily', priority: 1 },
-		{ url: `${siteUrl}${ROUTES.catalog}`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
-		{ url: `${siteUrl}${ROUTES.about}`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
+		{
+			url: `${siteUrl}${ROUTES.catalog}`,
+			lastModified: now,
+			changeFrequency: 'daily',
+			priority: 0.9
+		},
+		{
+			url: `${siteUrl}${ROUTES.about}`,
+			lastModified: now,
+			changeFrequency: 'monthly',
+			priority: 0.5
+		},
 		{
 			url: `${siteUrl}${ROUTES.delivery}`,
 			lastModified: now,

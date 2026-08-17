@@ -1,8 +1,7 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-
 import cn from 'clsx'
+import { useEffect, useRef, useState } from 'react'
 
 import styles from './lazy-map.module.scss'
 

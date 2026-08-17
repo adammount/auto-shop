@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 
+import { migrations } from './migrations'
 import { Brands } from '@/collections/brands'
 import { Categories } from '@/collections/categories'
 import { Media } from '@/collections/media'
@@ -16,8 +17,6 @@ import { Users } from '@/collections/users'
 import { Banners } from '@/globals/banners'
 import { Reviews } from '@/globals/reviews'
 import { SiteSettings } from '@/globals/site-settings'
-
-import { migrations } from './migrations'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 

@@ -34,9 +34,7 @@ const nextConfig: NextConfig = {
 		formats: ['image/avif', 'image/webp'],
 		remotePatterns: [
 			{ protocol: 'https', hostname: 'picsum.photos' },
-			...(serverHostname
-				? [{ protocol: serverProtocol, hostname: serverHostname } as const]
-				: [])
+			...(serverHostname ? [{ protocol: serverProtocol, hostname: serverHostname } as const] : [])
 		]
 	}
 }

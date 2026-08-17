@@ -67,12 +67,12 @@ export async function ContactsScreen() {
 					</div>
 				</div>
 
-					{settings.address && (
-						<LazyMap
-							address={settings.address}
-							className={styles.map}
-						/>
-					)}
+				{settings.address && (
+					<LazyMap
+						address={settings.address}
+						className={styles.map}
+					/>
+				)}
 			</div>
 		</div>
 	)

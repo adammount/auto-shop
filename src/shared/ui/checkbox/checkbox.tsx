@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import type { InputHTMLAttributes, ReactNode } from 'react'
+import { type InputHTMLAttributes, type ReactNode, forwardRef } from 'react'
 
 import { Icon } from '@/shared/ui/icon'
 
@@ -10,10 +10,14 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	count?: number
 }
 
-export function Checkbox({ children, count, className, ...props }: Props) {
+export const Checkbox = forwardRef<HTMLInputElement, Props>(function Checkbox(
+	{ children, count, className, ...props },
+	ref
+) {
 	return (
 		<label className={cn(styles.checkbox, className)}>
 			<input
+				ref={ref}
 				type='checkbox'
 				className={styles.input}
 				{...props}
@@ -29,4 +33,4 @@ export function Checkbox({ children, count, className, ...props }: Props) {
 			</span>
 		</label>
 	)
-}
+})

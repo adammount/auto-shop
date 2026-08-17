@@ -3,12 +3,22 @@ import { z } from 'zod'
 
 import { getCurrentUser, isApprovedWholesale } from '@/shared/lib/auth'
 import { getPayloadClient } from '@/shared/lib/payload'
+import { clientKey, rateLimit } from '@/shared/lib/rate-limit'
 
 const pricingSchema = z.object({
-	productIds: z.array(z.string().min(1)).min(1)
+	productIds: z.array(z.string().min(1)).min(1).max(100)
 })
 
 export async function POST(request: Request) {
+	const allowed = rateLimit(clientKey(request, 'pricing'), {
+		limit: 60,
+		windowMs: 15 * 60 * 1000
+	})
+
+	if (!allowed) {
+		return NextResponse.json({ error: 'Слишком много запросов, попробуйте позже' }, { status: 429 })
+	}
+
 	const body = await request.json().catch(() => null)
 	const parsed = pricingSchema.safeParse(body)
 

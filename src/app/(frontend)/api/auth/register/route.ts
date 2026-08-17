@@ -1,3 +1,4 @@
+import { NextResponse } from 'next/server'
 import { APIError, generatePayloadCookie } from 'payload'
 
 import { registerSchema } from '@/shared/api/auth-schema'
@@ -11,14 +12,14 @@ export async function POST(request: Request) {
 	})
 
 	if (!allowed) {
-		return Response.json({ error: 'Слишком много попыток, попробуйте позже' }, { status: 429 })
+		return NextResponse.json({ error: 'Слишком много попыток, попробуйте позже' }, { status: 429 })
 	}
 
 	const body = await request.json().catch(() => null)
 	const parsed = registerSchema.safeParse(body)
 
 	if (!parsed.success) {
-		return Response.json(
+		return NextResponse.json(
 			{ error: 'Проверьте поля формы', issues: parsed.error.issues },
 			{ status: 400 }
 		)
@@ -36,7 +37,7 @@ export async function POST(request: Request) {
 	})
 
 	if (existing.docs.length > 0) {
-		return Response.json({ error: 'Пользователь с таким e-mail уже есть' }, { status: 409 })
+		return NextResponse.json({ error: 'Пользователь с таким e-mail уже есть' }, { status: 409 })
 	}
 
 	try {
@@ -51,15 +52,24 @@ export async function POST(request: Request) {
 			data: { email, password }
 		})
 
+		const usersCollection = payload.config.collections.find(item => item.slug === 'users')
+
+		if (!usersCollection || !result.token) {
+			return NextResponse.json({ error: 'Не удалось завершить вход' }, { status: 500 })
+		}
+
 		const cookie = generatePayloadCookie({
-			collectionAuthConfig: payload.config.collections.find(item => item.slug === 'users')!.auth,
+			collectionAuthConfig: usersCollection.auth,
 			cookiePrefix: payload.config.cookiePrefix,
-			token: result.token!
+			token: result.token
 		})
 
-		return Response.json({ user: result.user }, { status: 201, headers: { 'Set-Cookie': cookie } })
+		return NextResponse.json(
+			{ user: result.user },
+			{ status: 201, headers: { 'Set-Cookie': cookie } }
+		)
 	} catch (err) {
 		const message = err instanceof APIError ? err.message : 'Не удалось зарегистрироваться'
-		return Response.json({ error: message }, { status: 400 })
+		return NextResponse.json({ error: message }, { status: 400 })
 	}
 }

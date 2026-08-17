@@ -40,8 +40,7 @@ export const getSiteSettings = unstable_cache(
 					address: global.address ?? '',
 					hours: global.hours ?? '',
 					requisites: global.requisites ?? '',
-					warehousePhoto:
-						uploadUrl(global.warehousePhoto) ?? global.warehousePhotoUrl ?? undefined
+					warehousePhoto: uploadUrl(global.warehousePhoto) ?? global.warehousePhotoUrl ?? undefined
 				}
 			},
 			{

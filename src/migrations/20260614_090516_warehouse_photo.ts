@@ -1,8 +1,8 @@
-import type { MigrateUpArgs, MigrateDownArgs } from '@payloadcms/db-postgres'
+import type { MigrateDownArgs, MigrateUpArgs } from '@payloadcms/db-postgres'
 import { sql } from '@payloadcms/db-postgres'
 
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
-  await db.execute(sql`
+	await db.execute(sql`
    CREATE TYPE "public"."enum_orders_delivery" AS ENUM('pickup', 'courier', 'transport');
   CREATE TYPE "public"."enum_orders_contact_method" AS ENUM('call', 'whatsapp', 'email');
   ALTER TABLE "orders" ADD COLUMN "delivery" "enum_orders_delivery";
@@ -14,7 +14,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
 }
 
 export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
-  await db.execute(sql`
+	await db.execute(sql`
    ALTER TABLE "site_settings" DROP CONSTRAINT "site_settings_warehouse_photo_id_media_id_fk";
   
   DROP INDEX "site_settings_warehouse_photo_idx";

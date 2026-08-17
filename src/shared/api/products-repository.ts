@@ -51,7 +51,8 @@ function buildCatalogWhere(query: CatalogQuery): Where {
 
 	if (query.categorySlugs.length > 0) and.push({ 'category.slug': { in: query.categorySlugs } })
 	if (query.brandSlugs.length > 0) and.push({ 'brand.slug': { in: query.brandSlugs } })
-	if (query.priceMin !== undefined) and.push({ priceRetail: { greater_than_equal: query.priceMin } })
+	if (query.priceMin !== undefined)
+		and.push({ priceRetail: { greater_than_equal: query.priceMin } })
 	if (query.priceMax !== undefined) and.push({ priceRetail: { less_than_equal: query.priceMax } })
 	if (query.inStockOnly) and.push({ stock: { greater_than: 0 } })
 

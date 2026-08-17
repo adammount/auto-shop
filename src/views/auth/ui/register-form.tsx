@@ -78,7 +78,7 @@ export function RegisterForm({ onLogin }: Props) {
 			/>
 			<Field
 				label='Пароль *'
-				placeholder='Не менее 6 символов'
+				placeholder='Не менее 8 символов'
 				type='password'
 				error={errors.password?.message}
 				{...register('password')}

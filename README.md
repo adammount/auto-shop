@@ -1,136 +1,179 @@
-# Деталь — интернет-магазин автозапчастей
+# Деталь
 
-Интернет-магазин автозапчастей: каталог с фильтрами, карточки товаров,
-корзина и избранное, оформление заказа без онлайн-оплаты (заявка уходит
-менеджеру на почту и в WhatsApp), личный кабинет, оптовые цены для сервисов.
-Контент управляется через Payload CMS.
+**Русский** · [English](./README.en.md)
 
-## Технологии
+Интернет-магазин автозапчастей: каталог с фильтрами, заказ без онлайн-оплаты (заявка уходит
+менеджеру на почту и в WhatsApp) и отдельные оптовые цены для автосервисов. Контент и заказы ведутся
+в собственной админке на Payload CMS.
 
-- **Next.js 16** (App Router, React Server Components, standalone-сборка)
-- **Payload CMS 3** (коллекции, глобалы, админка, REST/GraphQL)
-- **PostgreSQL** (`@payloadcms/db-postgres`, миграции)
-- **TypeScript** (strict)
-- **SCSS-модули** + дизайн-токены
-- **Zustand** — клиентское состояние (корзина, избранное, сессия, UI)
-- **React Hook Form + Zod** — формы и валидация
-- **Resend** — письма о заказах
-- **Cloudflare Turnstile** — капча на оформлении
-- **Bun** — пакетный менеджер и рантайм
+[![Live Demo](https://img.shields.io/badge/Live_Demo-muraauto.ru-d6411a?style=for-the-badge)](https://muraauto.ru)
+[![Source](https://img.shields.io/badge/Source-GitHub-16130f?style=for-the-badge&logo=github)](https://github.com/adammount/auto-shop)
 
-## Требования
+![Demo](./assets/demo.gif)
 
-- Bun ≥ 1.2
-- PostgreSQL 14+ (локально или в Docker)
-- Node-совместимое окружение (для standalone-сервера на проде)
+## Стек
 
-## Быстрый старт
+**Фронтенд:** Next.js 16 (App Router, RSC, ISR), React 19, TypeScript strict, SCSS-модули с
+дизайн-токенами, Zustand, React Hook Form + Zod, Embla Carousel, next/font/local
 
-```bash
-# 1. Установить зависимости
-bun install
+**Бэкенд / CMS:** Payload CMS 3 (встроен в то же Next.js-приложение), PostgreSQL 17, Lexical
+richtext, REST + GraphQL, route handlers Next.js
 
-# 2. Создать .env из примера и заполнить значения
-cp .env.example .env
+**Внешние сервисы:** Resend (письма о заказах), Cloudflare Turnstile (капча), WhatsApp deep link
 
-# 3. Поднять Postgres для разработки (опционально, через Docker)
-docker compose -f docker-compose.dev.yml up -d
+**Инфраструктура:** Bun, Docker (multi-stage, standalone-сборка), docker-compose, Dokploy
 
-# 4. Применить миграции
-bun payload migrate
+## Задача
 
-# 5. Заполнить демо-данными и создать администратора
-bun run seed
+Нужен был магазин автозапчастей, где розничный покупатель и автосервис видят разные цены, а заказ
+оформляется заявкой — без онлайн-оплаты, с уходом менеджеру в почту и WhatsApp. Ограничения: контент
+(товары, категории, баннеры, отзывы, промокоды) редактирует владелец, а не разработчик, при этом
+каталог должен отдаваться статикой и не ходить в базу на каждый запрос. Отсюда Payload CMS,
+встроенный в то же Next.js-приложение — одна кодовая база, один деплой, общие типы между админкой и
+витриной — и кэш по тегам, который сбрасывается хуками CMS при правке контента.
 
-# 6. Запустить дев-сервер
-bun run dev
-```
+## Технические решения
 
-Приложение: `http://localhost:3000`
-Админка Payload: `http://localhost:3000/admin`
+- **Оптовые цены не утекают в публичный кэш.** Поле `priceWholesale` закрыто field-level access
+  (`read: isWholesaleOrAdminFieldLevel`), поэтому в закэшированный ответ каталога оно физически не
+  попадает. Клиент запрашивает оптовые цены отдельно через `POST /api/pricing`: сервер определяет
+  пользователя по httpOnly-cookie и отдаёт оптовую цену только при роли `wholesale` со статусом
+  `approved`. Карточки не бомбят API поштучно — стор `shared/store/pricing.ts` копит `productId` и
+  флашит их одним батчем через 80 мс.
 
-## Переменные окружения
+- **ISR по тегам с инвалидацией из хуков CMS.** Запросы каталога и контента обёрнуты в
+  `unstable_cache` с тегами `products` / `content` (`shared/config/cache.ts`, revalidate 1 ч),
+  страница товара — полноценный SSG через `generateStaticParams`. Хуки Payload `afterChange` /
+  `afterDelete` дёргают `revalidateTag(tag, 'max')`, так что правка в админке сбрасывает ровно
+  нужный тег, без общего сброса и без ожидания часа. Нюанс Next 16: `revalidateTag` требует второй
+  аргумент-профиль, а в seed-скриптах вне серверного контекста хукам нужно передавать
+  `context: { disableRevalidate: true }` — иначе падает «static generation store missing».
 
-Полный список — в [`.env.example`](./.env.example).
+- **Итог заказа считается на сервере, клиенту не доверяем.** `POST /api/orders` валидирует тело
+  Zod-схемой, но цены берёт не из корзины клиента: перечитывает товары из БД по id и складывает
+  `priceSnapshot` заново, а для оптовой сессии подставляет `priceWholesale` — тоже на сервере.
+  Промокод резолвится из коллекции `PromoCodes` с проверкой активности, срока и минимальной суммы.
+  Дальше — запись заказа, письма менеджеру и клиенту через Resend (тихо пропускаются, если ключ не
+  задан) и возврат `wa.me`-ссылки с готовым текстом заявки.
 
-| Переменная | Назначение |
-| --- | --- |
-| `DATABASE_URI` | строка подключения к PostgreSQL |
-| `PAYLOAD_SECRET` | секрет для подписи токенов Payload |
-| `NEXT_PUBLIC_SERVER_URL` | публичный URL сайта (нужен и на этапе сборки) |
-| `POSTGRES_PASSWORD` | пароль БД для docker-compose |
-| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | публичный ключ капчи (нужен при сборке) |
-| `TURNSTILE_SECRET_KEY` | секретный ключ капчи (сервер) |
-| `RESEND_API_KEY` | ключ Resend для писем о заказах |
-| `ORDER_EMAIL_TO` / `ORDER_EMAIL_FROM` | адреса для уведомлений о заказах |
-| `ADMIN_EMAIL` / `ADMIN_PASSWORD` / `ADMIN_NAME` | первый администратор (seed) |
+- **Разделение серверного и клиентского состояния.** Данные каталога, товара и контента приходят из
+  RSC — в клиентском сторе их нет. Zustand держит только то, что принадлежит браузеру: корзина,
+  избранное, сессия, открытый drawer, тосты, последний заказ; корзина и избранное — с `persist`.
+  Флаг гидратации сделан через `useSyncExternalStore` (`shared/lib/use-hydrated.ts`), а не
+  `useEffect` + `setState`, — иначе счётчики в хедере дают hydration mismatch.
 
-`NEXT_PUBLIC_*` инлайнятся в клиентский бандл во время сборки — задавайте их
-до запуска `build`.
+- **Auth на встроенном Payload Auth, все проверки прав на сервере.** Одна коллекция `users` с ролями
+  `customer | wholesale | admin`, пароли хэширует Payload, токен — в httpOnly + SameSite cookie
+  (Secure в проде), `maxLoginAttempts: 5` и блокировка на 15 минут. Публичные route handlers закрыты
+  Zod-валидацией и in-memory rate-limit по IP из доверенного заголовка `CF-Connecting-IP`.
+  Клиентский гард `/account` — только UX: сами данные защищены на уровне API запросами с
+  `overrideAccess: false` и передачей пользователя, так что access-правила коллекции применяет
+  Payload.
 
-## Скрипты
+- **Резиновая вёрстка 1px макета = 1rem.** `html { font-size: calc(100/1440*1vw) }` на десктопе и
+  `calc(100/375*1vw)` на мобильном — значения из Figma переносятся в `rem` без пересчёта, макет
+  тянется пропорционально на всех ширинах. Обратная сторона: `rem` перестаёт быть физическим
+  размером, поэтому поля ввода на тач-устройствах принудительно переводятся на `16px` — иначе Safari
+  на iOS зумит страницу при фокусе. Шрифты подключены через `next/font/local` вместо ручного
+  `@font-face`, что убрало CLS от подмены шрифта; иконки — один SVG-спрайт на `currentColor` вместо
+  набора компонентов.
 
-| Команда | Действие |
-| --- | --- |
-| `bun run dev` | дев-сервер |
-| `bun run build` | продакшн-сборка (standalone) |
-| `bun run start` | запуск собранного приложения |
-| `bun run lint` | ESLint |
-| `bun run typecheck` | проверка типов (`tsc --noEmit`) |
-| `bun run format` | Prettier |
-| `bun run generate:types` | генерация типов Payload |
-| `bun run migrate` | миграции БД |
-| `bun run seed` | сидинг демо-данных и админа |
+## Функциональность
 
-## Структура
+- Каталог с фильтрами (категории, бренды, диапазон цены, наличие) и сортировкой; фасеты считаются с
+  количеством товаров
+- Страница товара: галерея со свайпом и превью, характеристики, похожие товары, оптовая цена для
+  одобренного оптовика
+- Поиск: дропдаун-подсказки в хедере с дебаунсом и отменой запросов + отдельная страница результатов
+- Корзина и избранное в drawer-панелях с сохранением между сессиями, счётчик и сумма в хедере
+- Оформление заказа: форма на RHF + Zod, промокоды, капча Turnstile, письма менеджеру и клиенту,
+  переход в WhatsApp с готовым сообщением
+- Личный кабинет: профиль, история заказов со статусами, избранное, заявка на оптовый статус
+- Админка Payload: товары, категории, бренды, промокоды, заказы, баннеры, отзывы, настройки сайта,
+  загрузка медиа
+- SEO и a11y: `sitemap.xml`, `robots.txt`, JSON-LD (Organization, Product, BreadcrumbList),
+  skip-link, фокус-трап в drawer'ах, `prefers-reduced-motion`
+
+## Архитектура
+
+FSD-lite без слоёв `widgets` и `entities`: `app → views → shared`. Слой называется `views`, а не
+`pages`, — Next.js резервирует `src/pages` под Pages Router и ломает сборку.
 
 ```
 src/
-  app/                  маршруты Next.js (App Router)
-    (frontend)/         витрина магазина
-    (payload)/          админка Payload
-    sitemap.ts          карта сайта
-    robots.ts           robots.txt
-    manifest.ts         PWA-манифест
-  collections/          коллекции Payload (products, categories, …)
-  globals/              глобалы Payload (site-settings, banners, reviews)
-  migrations/           миграции БД
-  views/                экраны страниц (FSD-слой views)
-  shared/               переиспользуемое: ui, api, lib, store, config, styles
+  app/
+    (frontend)/        # витрина: layout с html/body, страницы, route handlers /api/*
+    (payload)/         # админка и API Payload (admin, api/[...slug], graphql)
+    layout.tsx         # passthrough — без него дублировался <html>
+  views/               # слайсы страниц: home, catalog, product, checkout, account, auth, ...
+  shared/
+    api/               # репозитории Payload, мапперы в UI-типы, zod-схемы
+    store/             # zustand: cart, favorites, session, pricing, ui, toast, last-order
+    ui/                # переиспользуемые компоненты (Button, ProductCard, Drawer, Icon, ...)
+    lib/               # auth, rate-limit, turnstile, форматтеры, хуки
+    config/            # routes, теги и TTL кэша
+    styles/            # токены, брейкпоинты, типографика, миксины
+  collections/         # Payload: users, products, categories, brands, orders, promo-codes, media
+  globals/             # banners, reviews, site-settings
+  migrations/          # миграции БД
 ```
 
-Архитектура — упрощённый Feature-Sliced Design: слой `views` (экраны) +
-`shared` (UI-кит, репозитории данных, утилиты, сторы, токены).
+Доступ к слайсам — только через `index.ts`, зависимости идут сверху вниз. Между `views` нет
+кросс-импортов: общие блоки (`ProductRail`, `FeatureGrid`) живут в `shared/ui` и принимают данные
+пропсами. Все обращения к БД собраны в репозиториях `shared/api`, наружу отдаются UI-типы через
+мапперы — компоненты не знают о формате Payload.
 
-## Данные и кеширование
+### Известные ограничения
 
-Данные читаются через репозитории (`shared/api/*-repository.ts`) и кешируются
-`unstable_cache` с тегами (`content`, `products`) и ревалидацией (1 час).
-Хуки Payload сбрасывают кеш по тегам при изменении контента в админке.
-Страницы — ISR: пре-рендер + ревалидация, без зависимости от БД на этапе сборки.
+Rate-limit публичных роутов хранится в памяти процесса (`Map` в `shared/lib/rate-limit.ts`). Для
+одного инстанса этого достаточно, но состояние не переживает рестарт и не разделяется между
+репликами. При горизонтальном масштабировании счётчики нужно выносить в Redis.
 
-## SEO
+## Запуск
 
-- Метаданные, OpenGraph и Twitter Cards, canonical
-- `sitemap.xml` (статические страницы, категории, товары) и `robots.txt`
-- PWA-манифест и SVG-иконка
-- Структурированные данные JSON-LD: Organization, Product, BreadcrumbList
+```bash
+git clone git@github.com:adammount/auto-shop.git
+cd auto-shop
+bun install
 
-## Доступность (a11y)
+cp .env.example .env                              # заполнить DATABASE_URI, PAYLOAD_SECRET
 
-Цель — **WCAG 2.2 AA**: семантическая разметка, skip-link, видимый фокус
-(`:focus-visible`), доступные имена интерактивных элементов, модальные drawer'ы
-с фокус-трапом и возвратом фокуса, поддержка `prefers-reduced-motion`.
+docker compose -f docker-compose.dev.yml up -d    # Postgres 17 на порту 5435
+bun run migrate                                   # миграции
+bun run seed                                      # демо-данные + администратор
 
-## Деплой
+bun run dev                                       # http://localhost:3000
+```
 
-Продакшн собирается в Docker (multi-stage, standalone). Запуск — через
-`docker-compose.yml` (web + PostgreSQL). Миграции применяются автоматически
-при старте контейнера (`docker-entrypoint.sh`).
+Админка — `/admin`. Первый администратор создаётся сидом из `ADMIN_EMAIL` / `ADMIN_PASSWORD`, причём
+`ADMIN_PASSWORD` обязателен — без него сид падает с ошибкой, чтобы в базе не появился аккаунт с
+предсказуемым паролем. Переменные читаются **только при создании**: если администратор уже есть, сид
+его пропускает, поэтому пароль потом меняется в самой админке, а не в `.env`.
+
+| Команда                  | Что делает                              |
+| ------------------------ | --------------------------------------- |
+| `bun run dev`            | Дев-сервер                              |
+| `bun run build`          | Прод-сборка (standalone)                |
+| `bun run check`          | Типы + ESLint + проверка форматирования |
+| `bun run typecheck`      | Проверка типов                          |
+| `bun run lint`           | ESLint                                  |
+| `bun run format`         | Форматирование Prettier                 |
+| `bun run generate:types` | Типы из схемы Payload                   |
+| `bun run seed`           | Сидинг демо-данных                      |
+
+Переменные окружения — в [`.env.example`](./.env.example): подключение к БД, `PAYLOAD_SECRET`,
+`NEXT_PUBLIC_SERVER_URL`, ключи Resend и Turnstile, адреса для писем о заказах. `NEXT_PUBLIC_*`
+инлайнятся в бандл на сборке — задавать до `build`.
+
+Прод разворачивается через `docker-compose.yml` (web + PostgreSQL, multi-stage `Dockerfile`: Bun на
+сборке, Node 22 alpine в рантайме). Миграции применяются автоматически при старте контейнера через
+`docker-entrypoint.sh`.
 
 ```bash
 docker compose up -d --build
 ```
 
-Подходит для развёртывания в Dokploy (тип Docker Compose): задайте переменные
-окружения в панели, привяжите домен на порт 3000.
+---
+
+**Автор:** Шамиль Айдемиров [Сайт](https://adammount.org/) · [GitHub](https://github.com/adammount)
+· [LinkedIn](https://www.linkedin.com/in/shamil-aydemirov-18a761429)

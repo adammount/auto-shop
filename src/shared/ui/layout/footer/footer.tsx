@@ -1,9 +1,8 @@
+import cn from 'clsx'
 import Link from 'next/link'
 
 import { getNavCategories, getSiteSettings } from '@/shared/api/content-repository'
 import { ROUTES } from '@/shared/config'
-import cn from 'clsx'
-
 import { telHref, waLink } from '@/shared/lib/contacts'
 import { Icon } from '@/shared/ui/icon'
 import { LazyMap } from '@/shared/ui/lazy-map'
@@ -104,19 +103,19 @@ export async function Footer() {
 							)}
 						</address>
 						{settings.address && (
-								<LazyMap
-									address={settings.address}
-									className={styles.map}
-								/>
-							)}
+							<LazyMap
+								address={settings.address}
+								className={styles.map}
+							/>
+						)}
 					</div>
 				</div>
 			</div>
 
 			<div className={styles.bottom}>
 				<span className={styles.copyright}>
-						© 2026 ДЕТАЛЬ. <span className={styles.copyrightRest}>Все права защищены.</span>
-					</span>
+					© 2026 ДЕТАЛЬ. <span className={styles.copyrightRest}>Все права защищены.</span>
+				</span>
 				<Link
 					href={ROUTES.privacy}
 					className={styles.legal}

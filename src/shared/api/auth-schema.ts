@@ -1,21 +1,25 @@
 import { z } from 'zod'
 
+const nameField = z.string().min(2, 'Укажите имя').max(100)
+const phoneField = z.string().min(6, 'Укажите телефон').max(30)
+const emailField = z.string().email('Введите корректный e-mail').max(200)
+
 export const loginSchema = z.object({
-	email: z.string().email('Введите корректный e-mail'),
-	password: z.string().min(1, 'Введите пароль')
+	email: emailField,
+	password: z.string().min(1, 'Введите пароль').max(200)
 })
 
 export const registerSchema = z.object({
-	name: z.string().min(2, 'Укажите имя'),
-	phone: z.string().min(6, 'Укажите телефон'),
-	email: z.string().email('Введите корректный e-mail'),
-	password: z.string().min(6, 'Не менее 6 символов'),
+	name: nameField,
+	phone: phoneField,
+	email: emailField,
+	password: z.string().min(8, 'Не менее 8 символов').max(200),
 	consent: z.boolean().refine(value => value, { message: 'Необходимо согласие' })
 })
 
 export const wholesaleSchema = z.object({
-	name: z.string().min(2, 'Укажите имя'),
-	phone: z.string().min(6, 'Укажите телефон')
+	name: nameField,
+	phone: phoneField
 })
 
 export type LoginValues = z.infer<typeof loginSchema>

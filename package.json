@@ -10,6 +10,8 @@
 		"lint": "eslint .",
 		"typecheck": "tsc --noEmit",
 		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"check": "bun run typecheck && bun run lint && bun run format:check",
 		"payload": "payload",
 		"generate:types": "payload generate:types",
 		"migrate": "payload migrate",

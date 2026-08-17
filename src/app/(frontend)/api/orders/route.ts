@@ -6,6 +6,7 @@ import { resolvePromo } from '@/shared/api/promo-repository'
 import { getCurrentUser, isApprovedWholesale } from '@/shared/lib/auth'
 import { formatPrice } from '@/shared/lib/format-price'
 import { getPayloadClient } from '@/shared/lib/payload'
+import { clientKey, rateLimit } from '@/shared/lib/rate-limit'
 import { verifyTurnstile } from '@/shared/lib/turnstile'
 
 const DELIVERY_LABELS: Record<string, string> = {
@@ -39,6 +40,15 @@ function buildWhatsappLink(
 }
 
 export async function POST(request: Request) {
+	const allowed = rateLimit(clientKey(request, 'orders'), {
+		limit: 10,
+		windowMs: 15 * 60 * 1000
+	})
+
+	if (!allowed) {
+		return NextResponse.json({ error: 'Слишком много попыток, попробуйте позже' }, { status: 429 })
+	}
+
 	const body = await request.json().catch(() => null)
 	const parsed = orderSchema.safeParse(body)
 
@@ -151,8 +161,8 @@ export async function POST(request: Request) {
 					subject: `Новый заказ ${orderNumber}`,
 					text: managerBody
 				})
-			} catch {
-				void 0
+			} catch (err) {
+				payload.logger.error(err, `Не удалось отправить письмо менеджеру по заказу ${orderNumber}`)
 			}
 		}
 
@@ -170,8 +180,8 @@ export async function POST(request: Request) {
 						`Итого: ${formatPrice(total)}`
 					].join('\n')
 				})
-			} catch {
-				void 0
+			} catch (err) {
+				payload.logger.error(err, `Не удалось отправить письмо покупателю по заказу ${orderNumber}`)
 			}
 		}
 	}

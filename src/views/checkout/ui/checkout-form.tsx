@@ -133,9 +133,7 @@ export function CheckoutForm() {
 						/>
 					)}
 				/>
-				{errors.captchaToken && (
-					<span className={styles.error}>{errors.captchaToken.message}</span>
-				)}
+				{errors.captchaToken && <span className={styles.error}>{errors.captchaToken.message}</span>}
 			</FormSection>
 		</div>
 	)
